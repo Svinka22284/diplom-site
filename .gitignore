@@ -1,0 +1,5 @@
+venv/
+.pulintec
+.idea
+db.sqlite3
+media/

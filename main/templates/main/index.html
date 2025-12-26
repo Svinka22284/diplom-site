@@ -1,0 +1,78 @@
+{% load static %}
+<!Doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="main-header">
+    <nav class="main-nav">
+        <a href="#">Доставка та оплата</a>
+        <a href="#">Контакти</a>
+        <a href="#">Питання та відповіді</a>
+        <a href="#">Знаходження магазинів</a>
+
+        <a href="#" class="auth-link">Увійти</a>
+        <a href="#" >Реєстрація</a>
+    </nav>
+</header>
+
+<div class="content-wrapper">
+
+    <aside class="left-sidebar">
+
+        <button class="btn flash-btn">Каталог товарів</button>
+
+ <div class="price-range">
+
+    <div class="price-input">
+        <div class="field">
+            <span>Min</span>
+            <input type="number" class="input-min" value="1000">
+        </div>
+        <div class="separator">-</div>
+        <div class="field">
+            <span>Max</span>
+            <input type="number" class="input-max" value="8400">
+        </div>
+    </div>
+
+    <div class="slider">
+        <div class="progress"></div>
+    </div>
+
+    <div class="range-input">
+        <input type="range" class="range-min" min="0" max="10000" value="1000" step="100">
+        <input type="range" class="range-max" min="0" max="10000" value="8400" step="100">
+    </div>
+</div>
+
+
+ <button class="btn flash-btn">Бренди</button>
+    </aside>
+
+</div>
+
+
+<div class="search-box">
+    <input class="search-txt" type="text" placeholder="Шукати">
+
+    <button class="search-box_btn">
+        <img class="picture"
+             src="data:image/png;base64,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">
+    </button>
+</div>
+<script src="{% static 'js/Javamain.js' %}"></script>
+</body>
+</html>

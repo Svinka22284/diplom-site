@@ -301,8 +301,6 @@ margin-left:10px;
     margin-top:110px;
 }
 
-
-
 .btn flash-btn{
 margin-top:50px;
 }
@@ -313,3 +311,179 @@ margin-top:50px;
  width:400px;
  height:400px;
 }
+
+
+
+
+.card {
+width:225px;
+min-height:500px;
+box_shadow:1px 2px 4px rgba(0,0,0,0.1);
+display:flex;
+flex-direction: column;
+border-radius: 4px;
+position:relative;
+transition:0.2s;
+}
+
+.card:hover {
+box-shadow: 4px 8px 16px rgba(255,102,51,0.2);
+}
+
+.card__top {
+flex: 0 0 220px;
+position: relative
+overflow: hidden;
+}
+
+.card__bottom {
+flex: 1 0 auto;
+flex-direction: column;
+flex: 1 0 auto;
+padding: 10px;
+}
+
+.card_label{
+position: absolute;
+bottom: 10px;
+left: 10px;
+padding: 4px 8px;
+background-color: orange;
+border-radius: 4px;
+color: white;
+font-weight: 400;
+font-size: 16px;
+}
+
+card__img{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%px;
+display: block
+}
+
+.card__img > img {
+width: 100%;
+height: 100%;
+object-fit: content;
+transition: 0.2s;
+}
+
+.card__img:hover > img {
+transform: scale(1.1);
+}
+
+.card__prices{
+display:flex;
+margin-bottom: 10px;
+flex:0 0 50%;
+}
+
+.card_price{
+width:50%;
+
+}
+
+.card__price::after{
+content: '\20B4';
+margin-left: 4px;
+position: relative;
+}
+
+.card__price-discount{
+font-size:19px;
+font-weight:700;
+color:#414141;
+display:flex;
+flex-wrap: wrap-reverse;
+}
+
+.card__price-discount::before{
+content:"Зі знижкою";
+font-weight:400;
+font-size:13px;
+color:white;
+}
+
+.card__price-common{
+font-weight:400;
+font-size:17px;
+color: #606060;
+display:flex;
+flex-wrap:wrap-reverse;
+justify-content: flex-end;
+}
+
+.card__price-common::before{
+content:"Звичайний";
+font-weight:400;
+font-size:13px;
+color:white;
+}
+
+.card__title{
+display:block;
+margin-bottom:10px;
+font-weight:400;
+font-size:17px;
+line-height: 150%;
+color:#414141;
+}
+
+.card__title:hover{
+color:#ff6633;
+}
+
+.card__btn{
+display:block;
+width:100%;
+font-weight:400;
+font-size: 17px;
+color: #70c05b;
+padding:10px;
+text-align:center;
+border:1px solid #70c05b;
+border-radius:4px;
+cursor: pointer;
+transition: 0.2s;
+margin-top: auto;
+}
+.card__btn:hover{
+border: 1px solid #ff6633;
+background-color:#70c05b;
+color:#fff;
+}
+
+.container{
+width:100%;
+max-width:1000px;
+padding:0 15px;
+margin:0 auto;
+}
+
+.container__cards{
+display:grid;
+width:100%;
+grid-template-column:repeat(auto-fill, 225px);
+justify-content:center;
+justify-items:center;
+margin: 0 auto;
+column-gap: 30px;
+row-gap: 40px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 225px);
+  width: 100%;
+  max-width: 1000px;
+  justify-content: center;
+  justify-items: center;
+  column-gap: 30px;
+  row-gap: 40px;
+  margin: 0 auto;
+}
+
+

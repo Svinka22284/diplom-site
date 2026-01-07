@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
@@ -73,8 +73,42 @@
     </div>
 </div>
 
+<div class="container_brend">
+    <div class="select-btn open">
+          <span class="btn-text">Бренди</span>
+          <span class="arrow-dwn">
+            <i class="fa-solid fa-chevron-down"></i>
+        </span>
+    </div>
+    <ul class="list-items">
+        <li class="item">
+            <span class="checkbox">
+              <i class="fa-solid fa-check check-icon"></i>
+            </span>
+            <span class="item-text"> FFFF</span>
+        </li>
+         <li class="item">
+            <span class="checkbox">
+              <i class="fa-solid fa-check check-icon"></i>
+            </span>
+            <span class="item-text"> DDDD</span>
+        </li>
 
- <button class="btn flash-btn">Бренди</button>
+         <li class="item">
+            <span class="checkbox">
+              <i class="fa-solid fa-check check-icon"></i>
+            </span>
+            <span class="item-text"> VVVV</span>
+        </li>
+        <li class="item">
+            <span class="checkbox">
+              <i class="fa-solid fa-check check-icon"></i>
+            </span>
+            <span class="item-text"> BBBB</span>
+        </li>
+
+    </ul>
+    </div>
     </aside>
 
 </div>
@@ -203,5 +237,6 @@
 </section>
 <script src="{% static 'js/Javamain.js' %}"></script>
 <script src="{% static 'js/Speech AP.js' %}"></script>
+<script src="{% static 'js/list.js' %}"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
 
 
 .left-sidebar {
-    width: 20px;
+    width: 300px;
 }
 
 .picture {
@@ -302,6 +302,7 @@ margin-left:10px;
 .left-sidebar > .btn {
     margin-bottom: 50px;
     margin-top:110px;
+
 }
 
 .btn flash-btn{
@@ -514,9 +515,123 @@ display: block;
 }
 
 .dropdown_catalog_content a:hover {
-background-color: #f1f1f1;
+background-color: blue;
 }
 
 .dropdown_meny_catalog:hover .dropdown_catalog_content {
 display: block;
+}
+
+
+
+
+
+.container_brend {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.select-btn {
+  display: flex;
+  height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #FFD6A5;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    color: white;
+
+}
+
+.select-btn .btn-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2D3436;
+}
+.btn-text{
+
+}
+.select-btn .arrow-dwn {
+  display: flex;
+  height: 28px;
+  width: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #5E8DFF;
+  color: white;
+  transition: 0.3s;
+}
+
+
+.select-btn.open .arrow-dwn {
+  transform: rotate(-180deg);
+}
+
+
+.list-items {
+  position: absolute;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 0;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+.select-btn.open ~ .list-items {
+  display: block;
+}
+
+
+.list-items .item {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.list-items .item:hover {
+  background-color: #f1f5f9;
+}
+
+
+.item .checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  border: 2px solid #3b82f6;
+  margin-right: 14px;
+  transition: 0.3s;
+}
+
+.checkbox .check-icon {
+  font-size: 12px;
+  color: white;
+  transform: scale(0);
+  transition: 0.2s;
+}
+
+.item.checked .checkbox {
+  background-color: #3b82f6;
+}
+
+.item.checked .check-icon {
+  transform: scale(1);
+}
+
+.item-text {
+  font-size: 16px;
+  color: #2D3436;
 }

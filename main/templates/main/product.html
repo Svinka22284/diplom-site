@@ -13,24 +13,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
 <header class="main-header">
     <nav class="main-nav">
         <a href="#">Доставка та оплата</a>
         <a href="#">Контакти</a>
         <a href="#">Питання та відповіді</a>
         <a href="#">Знаходження магазинів</a>
-
-
     </nav>
       <a href="#" class="auth-link">Увійти</a>
       <a href="#" class="auth-link1" >Реєстрація</a>
 </header>
 <img class="picture-logo" src="{% static 'images/теремок.png' %}">
 <div class="content-wrapper">
-
     <aside class="left-sidebar">
     <div class="dropdown_meny_catalog">
         <button class="btn flash-btn">Каталог товарів</button>
@@ -50,7 +45,6 @@
         </div>
     </div>
  <div class="price-range">
-
     <div class="price-input">
         <div class="field">
             <span>Min</span>
@@ -62,17 +56,14 @@
             <input type="number" class="input-max" value="10000">
         </div>
     </div>
-
     <div class="slider">
         <div class="progress"></div>
     </div>
-
     <div class="range-input">
         <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
         <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
     </div>
 </div>
-
 <div class="container_brend">
     <div class="select-btn open">
           <span class="btn-text">Бренди</span>
@@ -110,10 +101,7 @@
     </ul>
     </div>
     </aside>
-
 </div>
-
-
 <div class="search-box">
     <input class="search-txt"  type="text" id="searchinput" placeholder="Шукати">
 
@@ -125,44 +113,21 @@
     <img class="picture" src="{% static 'images/800309.png' %}">
     </button>
 </div>
-
-<div class="footer">
-    <div class="container_footer">
-        <div class="footer-row">
-            <div class="footer-copyright footer-col">
-              <div class="footer-copyright-name">
-                  @ star_platunum
-              </div>
-                <p>
-                  Учбовий сайт для покращення знань в галузі фронтент розробки та бекенд розробки
-                </p>
-            </div>
-            <div class="footer-icons footer-col">
-                <p>Мої контакти в соціальних мережах</p>
-               <div class="footer-icons-row">
-                   <a href="#">
-                       <img  src="{% static 'images/instagram.png' %}" alt="">
-                   </a>
-                   <a href="#">
-                       <img src="{% static 'images/in.png' %}" alt="">
-                   </a>
-                   <a href="#">
-                       <img src="{% static 'images/telegram.png' %}" alt="">
-                   </a>
-                   <a href="#">
-                       <img src="{% static 'images/github.png' %}" alt="">
-                   </a>
-               </div>
-            </div>
-            <div class="footer-contacts footer-col">
-              <a href="#" class="footer-button">КОНТАКТИ</a>
-                <p>+380661686925</p>
-                 <p>+380634534534</p>
-                 <p>+110661686925</p>
-            </div>
+<div class="table-product">
+    <img class="image-product" src="{% static 'images/cover.jpg' %}">
+    <div class="body-product">
+        <div class="price-product">
+            <p>Цена:</p>
+            <strong>
+                150.00$
+            </strong>
         </div>
+        <h5 class="name-product">Подушка мягкая</h5>
+        <h6 class="text-product">Подушка мягкая классная вообще вау</h6>
+        <button class="add-corzina-product"></button>
     </div>
 </div>
+
 <script src="{% static 'js/Javamain.js' %}"></script>
 <script src="{% static 'js/Speech AP.js' %}"></script>
 <script src="{% static 'js/list.js' %}"></script>

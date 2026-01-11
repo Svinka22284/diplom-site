@@ -715,9 +715,12 @@ flex-grow: 1;
     font-size:16px;
     text-decoration:none;
     text-transform:uppercase;
+    cursor: pointer;
 
 }
-
+.footer-button:hover{
+background:#292826;
+}
 .footer-contacts p{
 margin: 15px 0;
 font-size:16px;
@@ -731,25 +734,34 @@ color:black;
 }
 
 .table-product{
-  display: inline-block;
-  margin-top: 80px;
-  background: white;
-  margin-left: 750px;
-  margin-top: -450px;
-  display: flex;
-  align-items: flex-start;
-  gap: 40px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0,2);
+    max-width: 1000px;
+    margin: 60px auto;
+    background: #fdf5e6 ;
+    padding: 50px;
+    display: flex;
+    gap: 80px;
+    border-radius: 8px;
+    margin-top: -430px;
+    margin-left: 500px
 
 }
 .image-product{
-width: 350px;
-height: auto;
-padding: 0;
+ width: 100%;
+ max-width: 220px;
 
 }
-
-
+.id-product{
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+.image-block{
+   background: white;
+    padding: 30px;
+    border-radius: 4px;
+    text-align: center;
+    width: 300px;
+}
 
 .table-product  .body-product{
 padding:20px;
@@ -759,4 +771,40 @@ padding:20px;
     margin:20px 0;
     font-size: 22px;
     font-weight: bold;
+}
+.body-product{
+ max-width: 400px
+}
+
+.name-product{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.price-product{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px
+}
+
+.text-product{
+    font-size: 17px;
+    line-height: 1.6;
+    color: #292826;
+    margin-bottom: 30px;
+
+}
+
+.add-corzina-product{
+    padding: 14px 40px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.add-corzina-product:hover{
+background:#000;
 }

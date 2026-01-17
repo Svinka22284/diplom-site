@@ -35,18 +35,9 @@
     <div class="dropdown_meny_catalog">
         <button class="btn flash-btn">Каталог товарів</button>
         <div class="dropdown_catalog_content">
-            <a href="{% url "catalog:index" %}">Спальня</a>
-            <a href="{% url "catalog:index" %}">Ліжка та матрици</a>
-            <a href="{% url "catalog:index" %}">Ванна</a>
-            <a href="{% url "catalog:index" %}">Офіс</a>
-            <a href="{% url "catalog:index" %}">Кухня та їдальня</a>
-            <a href="{% url "catalog:index" %}">Зберігання</a>
-            <a href="{% url "catalog:index" %}">Для вікон</a>
-            <a href="{% url "catalog:index" %}">Для саду</a>
-            <a href="{% url "catalog:index" %}">Для дому</a>
-            <a href="{% url "catalog:index" %}">Різдво та Новий Рій</a>
-            <a href="{% url "catalog:index" %}">Новинки</a>
-            <a href="{% url "catalog:index" %}">Акція</a>
+            {% for category in categories %}
+            <a href="{% url "catalog:index" %}">{{category.name}}</a>
+            {% endfor %}
         </div>
     </div>
  <div class="price-range">

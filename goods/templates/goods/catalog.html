@@ -1,4 +1,5 @@
 {% load static %}
+{%load goods_tags%}
 <!Doctype html>
 <html lang="ru">
 <head>
@@ -35,18 +36,10 @@
     <div class="dropdown_meny_catalog">
         <button class="btn flash-btn">Каталог товарів</button>
         <div class="dropdown_catalog_content">
-            <a href="#">Спальня</a>
-            <a href="#">Ліжка та матрици</a>
-            <a href="#">Ванна</a>
-            <a href="#">Офіс</a>
-            <a href="#">Кухня та їдальня</a>
-            <a href="#">Зберігання</a>
-            <a href="#">Для вікон</a>
-            <a href="#">Для саду</a>
-            <a href="#">Для дому</a>
-            <a href="#">Різдво та Новий Рій</a>
-            <a href="#">Новинки</a>
-            <a href="#">Акція</a>
+            {% tagcategories as categories %}
+            {% for category in categories %}
+            <a href="{% url "catalog:index" %}">{{category.name}}</a>
+            {% endfor %}
         </div>
     </div>
  <div class="price-range">
@@ -132,112 +125,29 @@
     <div class="card">
         <div class="card__top">
             <a href="#!" class="card__img">
-            <img src="{% static product.image %}" alt="cover.png">
+                {%if product.image%}
+            <img src="{{ product.image.url }}" alt="{{product.name}}">
+                {%endif%}
             </a>
-            <div class="card_label">-10%</div>
+            <div class="card_label">{{product.discount}}</div>
+
         </div>
         <div class="card__bottom">
             <div class="card__prices">
-            <div class="card__price card__price-discount">100</div>
+
+            <div class="card__price card__price-discount">{{product.sell_price}}</div>
             <div class="card__price card__price-common">{{product.price}}</div>
+
             </div>
             <a href="#!" class="card__title">{{product.name}}</a>
             <button class="card__btn">додати в корзину</button>
+
         </div>
+            <div class="card__id">{{product.display_id}}</div>
     </div>
 
 </div>
 {% endfor %}
-    <div class="container container__cards">
-    <div class="card">
-        <div class="card__top">
-            <a href="#!" class="card__img">
-            <img src="{% static 'images/cover.jpg' %}" alt="cover.png">
-            </a>
-            <div class="card_label">-10%</div>
-        </div>
-        <div class="card__bottom">
-            <div class="card__prices">
-            <div class="card__price card__price-discount">100</div>
-            <div class="card__price card__price-common">110</div>
-            </div>
-            <a href="#!" class="card__title">подушка блокитна</a>
-            <button class="card__btn">додати в корзину</button>
-        </div>
-    </div>
-</div>
-    <div class="container container__cards">
-    <div class="card">
-        <div class="card__top">
-            <a href="#!" class="card__img">
-            <img src="{% static 'images/cover.jpg' %}" alt="cover.png">
-            </a>
-            <div class="card_label">-10%</div>
-        </div>
-        <div class="card__bottom">
-            <div class="card__prices">
-            <div class="card__price card__price-discount">100</div>
-            <div class="card__price card__price-common">110</div>
-            </div>
-            <a href="#!" class="card__title">подушка блокитна</a>
-            <button class="card__btn">додати в корзину</button>
-        </div>
-    </div>
-</div>
-    <div class="container container__cards">
-    <div class="card">
-        <div class="card__top">
-            <a href="#!" class="card__img">
-            <img src="{% static 'images/cover.jpg' %}" alt="cover.png">
-            </a>
-            <div class="card_label">-10%</div>
-        </div>
-        <div class="card__bottom">
-            <div class="card__prices">
-            <div class="card__price card__price-discount">100</div>
-            <div class="card__price card__price-common">110</div>
-            </div>
-            <a href="#!" class="card__title">подушка блокитна</a>
-            <button class="card__btn">додати в корзину</button>
-        </div>
-    </div>
-</div>
-    <div class="container container__cards">
-    <div class="card">
-        <div class="card__top">
-            <a href="#!" class="card__img">
-            <img src="{% static 'images/cover.jpg' %}" alt="cover.png">
-            </a>
-            <div class="card_label">-10%</div>
-        </div>
-        <div class="card__bottom">
-            <div class="card__prices">
-            <div class="card__price card__price-discount">100</div>
-            <div class="card__price card__price-common">110</div>
-            </div>
-            <a href="#!" class="card__title">подушка блокитна</a>
-            <button class="card__btn">додати в корзину</button>
-        </div>
-    </div>
-</div>
-    <div class="container container__cards">
-    <div class="card">
-        <div class="card__top">
-            <a href="#!" class="card__img">
-            <img src="{% static 'images/cover.jpg' %}" alt="cover.png">
-            </a>
-            <div class="card_label">-10%</div>
-        </div>
-        <div class="card__bottom">
-            <div class="card__prices">
-            <div class="card__price card__price-discount">100</div>
-            <div class="card__price card__price-common">110</div>
-            </div>
-            <a href="#!" class="card__title">подушка блокитна</a>
-            <button class="card__btn">додати в корзину</button>
-        </div>
-    </div>
-</div>
 </section>
 <div class="footer">
     <div class="container_footer">

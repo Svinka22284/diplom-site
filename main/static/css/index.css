@@ -808,3 +808,10 @@ padding:20px;
 .add-corzina-product:hover{
 background:#000;
 }
+
+.card__id {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  font-size: 15px;
+  color: gray;

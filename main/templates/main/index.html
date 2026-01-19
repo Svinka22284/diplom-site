@@ -1,4 +1,6 @@
 {% load static %}
+{%load goods_tags%}
+
 <!Doctype html>
 <html lang="ru">
 <head>
@@ -35,6 +37,7 @@
     <div class="dropdown_meny_catalog">
         <button class="btn flash-btn">Каталог товарів</button>
         <div class="dropdown_catalog_content">
+            {% tagcategories as categories %}
             {% for category in categories %}
             <a href="{% url "catalog:index" %}">{{category.name}}</a>
             {% endfor %}

@@ -124,7 +124,7 @@
 
     <div class="card">
         <div class="card__top">
-            <a href="#!" class="card__img">
+            <a href="{% url "catalog:product" product.slug %}" class="card__img">
                 {%if product.image%}
             <img src="{{ product.image.url }}" alt="{{product.name}}">
                 {%endif%}

@@ -1,4 +1,5 @@
 {% load static %}
+{%load goods_tags%}
 <!Doctype html>
 <html lang="ru">
 <head>
@@ -30,18 +31,10 @@
     <div class="dropdown_meny_catalog">
         <button class="btn flash-btn">Каталог товарів</button>
         <div class="dropdown_catalog_content">
-            <a href="#">Спальня</a>
-            <a href="#">Ліжка та матрици</a>
-            <a href="#">Ванна</a>
-            <a href="#">Офіс</a>
-            <a href="#">Кухня та їдальня</a>
-            <a href="#">Зберігання</a>
-            <a href="#">Для вікон</a>
-            <a href="#">Для саду</a>
-            <a href="#">Для дому</a>
-            <a href="#">Різдво та Новий Рій</a>
-            <a href="#">Новинки</a>
-            <a href="#">Акція</a>
+           {% tagcategories as categories %}
+            {% for category in categories %}
+            <a href="{% url "catalog:index" %}">{{category.name}}</a>
+            {% endfor %}
         </div>
     </div>
  <div class="price-range">
@@ -115,18 +108,24 @@
 </div>
 <div class="table-product">
     <div class="image-block">
-        <img class="image-product" src="{% static 'images/cover.jpg' %}">
-        <div class="id-product">id:40421</div>
+        <img class="image-product" src="{{ product.image.url }}">
+        <div class="id-product">{{product.display_id}}</div>
     </div>
     <div class="body-product">
-        <h5 class="name-product">Подушка мягкая</h5>
+        <h5 class="name-product">{{product.name}}</h5>
         <div class="price-product">
             <p></p>
+            {%if product.discount%}
             <strong>
-                Цена: 150.00$
+                {{product.sell_price}}
             </strong>
+            {%else%}
+             <strong>
+                {{product.price}}
+            </strong>
+            {%endif%}
         </div>
-        <h6 class="text-product">Подушка мягкая классная вообще вау</h6>
+        <h6 class="text-product">{{product.description}}</h6>
         <button class="footer-button">Додати в корзину</button>
     </div>
 </div>

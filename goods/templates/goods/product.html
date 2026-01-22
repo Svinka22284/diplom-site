@@ -30,10 +30,10 @@
     <aside class="left-sidebar">
     <div class="dropdown_meny_catalog">
         <button class="btn flash-btn">Каталог товарів</button>
-        <div class="dropdown_catalog_content">
-           {% tagcategories as categories %}
+          <div class="dropdown_catalog_content">
+            {% tagcategories as categories %}
             {% for category in categories %}
-            <a href="{% url "catalog:index" %}">{{category.name}}</a>
+            <a href="{% url 'catalog:index' category.slug %}">{{category.name}}</a>
             {% endfor %}
         </div>
     </div>

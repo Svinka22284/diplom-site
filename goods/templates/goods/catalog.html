@@ -38,7 +38,7 @@
         <div class="dropdown_catalog_content">
             {% tagcategories as categories %}
             {% for category in categories %}
-            <a href="{% url "catalog:index" category.slug %}">{{category.name}}</a>
+            <a href="{% url 'catalog:index' category.slug %}">{{category.name}}</a>
             {% endfor %}
         </div>
     </div>
@@ -150,11 +150,14 @@
 {% endfor %}
 </section>
 <ul class="paginecia">
-    <li class="button_paginecia"><a class="button_paginecia_tag" href="#">1</a></li>
-    <li class="button_paginecia"><a class="button_paginecia_tag" href="#">2</a></li>
-    <li class="button_paginecia"><a class="button_paginecia_tag" href="#">3</a></li>
-    <li class="button_paginecia"><a class="button_paginecia_tag" href="#">4</a></li>
-    <li class="button_paginecia"><a class="button_paginecia_tag" href="#">5</a></li>
+    {%for page in goods.paginator.page_range%}
+    {%if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
+     <li class="button_paginecia"><a class="button_paginecia_tag" href="?page={{page}}">{{page}}</a></li>
+    {%endif%}
+    {% endfor %}
+
+
+
 </ul>
 <div class="footer">
     <div class="container_footer">

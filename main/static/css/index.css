@@ -815,3 +815,36 @@ background:#000;
   bottom: 8px;
   font-size: 15px;
   color: gray;
+}
+
+.paginecia{
+display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    padding: 0;
+}
+
+.button_paginecia{
+list-style: none;
+}
+.button_paginecia_tag{
+position:relative;
+display:block;
+width:40px;
+height:40px;
+font-size:20px;
+text-align:center;
+background: #D2B48C;
+line-height:40px;
+text-decoration: none;
+margin: 5px;
+border-radius:4px;
+box-shadow: inset 0 5px 10px rgba(0,0,0,.1),0 2px 5px rgba(0,0,0,.5);
+
+}
+
+.button_paginecia_tag:hover{
+color: red
+text-shadow: 0 0 20px rgb(255,224,27),
+             0 0 20px rgb(255,224,27);
+}

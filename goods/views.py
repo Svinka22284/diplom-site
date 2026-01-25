@@ -4,12 +4,19 @@ from goods.models import Products
 # Create your views here.
 def catalog(request,category_slug):
     page = request.GET.get('page',1)
+    range_min = request.GET.get('range_min')
+    range_max =request.GET.get('range_max')
+
     if category_slug == 'vse-tovary':
         goods = Products.objects.all()
     else:
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
 
-    paginator = Paginator(goods, 3)
+
+    if range_min and range_max:
+        goods = goods.filter(price__gte=int(range_min),price__lte=int(range_max))
+    goods = goods.order_by('price')
+    paginator = Paginator(goods, 10)
 
     current_page = paginator.page(int(page))
     context = {

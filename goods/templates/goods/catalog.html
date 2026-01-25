@@ -42,8 +42,8 @@
             {% endfor %}
         </div>
     </div>
+ <form action="{% url "catalog:index" slug_url %}" method="get">
  <div class="price-range">
-
     <div class="price-input">
         <div class="field">
             <span>Min</span>
@@ -55,17 +55,15 @@
             <input type="number" class="input-max" value="10000">
         </div>
     </div>
-
     <div class="slider">
         <div class="progress"></div>
     </div>
-
     <div class="range-input">
-        <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
-        <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
+        <input type="range" class="range-min" min="0" max="10000" value="{{ request.GET.range_min|default:0 }}" step="100" name="range_min" onchange="this.form.submit()">
+        <input type="range" class="range-max" min="0" max="10000"  value="{{ request.GET.range_max|default:10000 }}" step="100" name="range_max" onchange="this.form.submit()">
     </div>
 </div>
-
+</form>
 <div class="container_brend">
     <div class="select-btn open">
           <span class="btn-text">Бренди</span>
@@ -152,7 +150,7 @@
 <ul class="paginecia">
     {%for page in goods.paginator.page_range%}
     {%if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
-     <li class="button_paginecia"><a class="button_paginecia_tag" href="?page={{page}}">{{page}}</a></li>
+     <li class="button_paginecia"><a class="button_paginecia_tag" href="?{%change_params page=page%}">{{page}}</a></li>
     {%endif%}
     {% endfor %}
 

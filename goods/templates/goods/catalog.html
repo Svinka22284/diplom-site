@@ -104,18 +104,18 @@
 
 </div>
 
-
+<form class="d-flex" role="search" action="{%url "catalog:search" %}" method="get">
 <div class="search-box">
-    <input class="search-txt"  type="text" id="searchinput" placeholder="Шукати">
-
+    <input class="search-txt"  type="search" name="q" id="searchinput" placeholder="Шукати">
     <button class="search-box_btn">
         <img class="picture"
              src="{% static 'images/лупа.png' %}">
     </button>
-    <button class="search-box_btn" id="voicebtn">
+    <button class="search-box_btn" id="voicebtn" type="button" >
     <img class="picture" src="{% static 'images/800309.png' %}">
     </button>
 </div>
+</form>
 <section class="cards">
 {% for product in goods%}
 <div class="container container__cards">
@@ -147,16 +147,19 @@
 </div>
 {% endfor %}
 </section>
+<form action="{%if request.Gt.q%}{%url "catalog:search" %}{%endif%}">
 <ul class="paginecia">
+
     {%for page in goods.paginator.page_range%}
     {%if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
      <li class="button_paginecia"><a class="button_paginecia_tag" href="?{%change_params page=page%}">{{page}}</a></li>
     {%endif%}
     {% endfor %}
-
-
-
+    {%if request.Gt.q%}
+        <input type="hidden" name="q" value="{{request.Get.q}}">
+    {% endif %}
 </ul>
+</form>
 <div class="footer">
     <div class="container_footer">
         <div class="footer-row">

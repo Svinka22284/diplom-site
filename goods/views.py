@@ -15,7 +15,7 @@ def catalog(request,category_slug=None):
     elif query:
         goods=q_search(query)
     else:
-        goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
+        goods = Products.objects.filter(category__slug=category_slug)
 
 
     if range_min and range_max:

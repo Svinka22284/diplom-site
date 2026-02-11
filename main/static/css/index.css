@@ -94,7 +94,8 @@ body {
     padding: 0;
     background: linear-gradient(135deg, #d8f8e8, #9fc2ff);
     min-height: 100vh;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .cina-range {
@@ -637,6 +638,7 @@ display: block;
 }
 
 .footer{
+margin-top: auto;
 background: #c0c0c0;
 padding-top:45px;
 padding-bottom:130px;

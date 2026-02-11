@@ -117,6 +117,12 @@
 </div>
 </form>
 <section class="cards">
+     {%if request.GET.q%}
+    <h3>Результат пошуку по запиту {{request.GET.q}}</h3>
+    {%if not goods%}
+    <h2>По пошуку ничего не знайдено</h2>
+    {%endif%}
+    {%endif%}
 {% for product in goods%}
 <div class="container container__cards">
 
@@ -137,7 +143,15 @@
             <div class="card__price card__price-common">{{product.price}}</div>
 
             </div>
-            <a href="#!" class="card__title">{{product.name}}</a>
+            <a href="#!" class="card__title">
+                {%autoescape off%}
+                 {% if product.headline %}
+                {{product.headline}}
+                {% else %}
+                {{product.name}}
+                {% endif %}
+                {%endautoescape%}
+            </a>
             <button class="card__btn">додати в корзину</button>
 
         </div>
@@ -147,6 +161,7 @@
 </div>
 {% endfor %}
 </section>
+{%if goods%}
 <form action="{%if request.Gt.q%}{%url "catalog:search" %}{%endif%}">
 <ul class="paginecia">
 
@@ -158,7 +173,9 @@
     {%if request.Gt.q%}
         <input type="hidden" name="q" value="{{request.Get.q}}">
     {% endif %}
+
 </ul>
+{%endif%}
 </form>
 <div class="footer">
     <div class="container_footer">

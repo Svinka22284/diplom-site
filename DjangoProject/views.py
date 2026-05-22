@@ -12,3 +12,12 @@ def catalog(request):
 
 def product(request):
     return render(request,'main/product.html')
+
+def avtorizeytion(request):
+    return render(request,'main/avtorizeytion.html')
+
+def registration(request):
+    return render(request,'main/registration.html')
+
+def profile(request):
+    return render(request,'main/profile.html')

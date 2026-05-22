@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block extra_ui %}
+{% endblock %}
+{%block content%}
+<div class="page-register">
+<div class="wrapper_window">
+    <form action="">
+        <h1>Register</h1>
+        <div class="form-row">
+            <div class="input-box">
+                <label>Username</label>
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="input-box">
+                <label>Name</label>
+                <input type="text" placeholder="Name" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-box">
+                <label>Email</label>
+                <input type="text" placeholder="Email" required>
+            </div>
+             <div class="input-box">
+                 <label>Number</label>
+                <input type="text" placeholder="Phone number" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-box">
+                <label>Password</label>
+                <input type="Password" placeholder="Password" required>
+            </div>
+            <div class="input-box">
+                <label>Confirmation</label>
+                <input type="password" placeholder="confirmation password" required>
+            </div>
+        </div>
+        <div class="remember-forgot">
+        </div>
+        <button type="submit" class="btn">Register</button>
+        <div class="register-link">
+            <p>You have account?<a href="#">Login</a><p>
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block extra_ui %}
+{% endblock %}
+{%block content%}
+<div class="container-profile">
+    <div class="left-profile-container">
+        <div class="card-profile">
+            <h2 class="title-profile">
+                Профиль пользователя
+            </h2>
+            <div class="avatar-profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+            </div>
+            <div class="file-profile">
+                <input type="file">
+            </div>
+            <div class="form-group">
+                <label>Имя*</label>
+                <input type="text" placeholder="Введите ваше имя">
+            </div>
+            <div class="form-group">
+                <label>Фамилия*</label>
+                <input type="text" placeholder="Введите вашу фамилию">
+            </div>
+            <div class="form-group">
+                <label>Имя пользователя*</label>
+                <input type="text" placeholder="Введите имя пользователя">
+            </div>
+            <div class="form-group">
+                <label>Email*</label>
+                <input type="email" placeholder="Введите email">
+            </div>
+            <button class="btn-profile">
+                Сохранить
+            </button>
+        </div>
+    </div>
+    <div class="right-profile-container">
+        <div class="card-profile">
+            <h2 class="title-profile">
+                Корзина
+            </h2>
+            <div class="cart-box-profile">
+                <div class="cart-header-profile">
+                    Товар
+                </div>
+                <div class="cart-item-profile">
+                    <div class="qty-profile">
+                        <button>-</button>
+                        <span>1</span>
+                        <button>+</button>
+                    </div>
+                    <div>
+                        x 100.00 =
+                    </div>
+                    <div class="price-profile">
+                        100.00 $
+                    </div>
+                    <div class="delete-profile">
+                        🗑
+                    </div>
+                </div>
+            </div>
+            <div class="summary-profile">
+                <p>Итого 1 товар(а) на сумму</p>
+                <h3>100.00 $</h3>
+            </div>
+            <button class="btn-profile order-btn-profile">
+                Оформить заказ
+            </button>
+        </div>
+        <div class="card-profile">
+            <h2 class="title-profile">
+                Мои заказы
+            </h2>
+            <div class="order-profile">
+                <div class="order-top-profile">
+                    <div>
+                        Заказ № 256 - 09 сентября 2023 9:04 |
+                        Статус:
+                        <span>В обработке</span>
+                    </div>
+                    <div>⌃</div>
+                </div>
+                <div class="table-wrapper-profile">
+                    <table class="table-profile">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Количество</th>
+                                <th>Цена</th>
+                                <th>Общая стоимость</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="#">
+                                        Комплект стол и три стула
+                                    </a>
+                                </td>
+                                <td>1</td>
+                                <td>255.00 $</td>
+                                <td>255.00 $</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="total-profile">
+                    <div>Итого:</div>
+                    <div>255.00 $</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

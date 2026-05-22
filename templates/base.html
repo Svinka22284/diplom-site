@@ -28,8 +28,8 @@
 
 
     </nav>
-      <a href="#" class="auth-link">Увійти</a>
-      <a href="#" class="auth-link1" >Реєстрація</a>
+      <a href="{%url 'users:avtorizeytion' %}" class="auth-link">Увійти</a>
+      <a href="{%url 'users:registration' %}" class="auth-link1" >Реєстрація</a>
 </header>
 <img class="picture-logo" src="{% static 'images/теремок.png' %}">
 {% block extra_ui %}

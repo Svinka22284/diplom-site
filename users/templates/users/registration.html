@@ -4,36 +4,70 @@
 {%block content%}
 <div class="page-register">
 <div class="wrapper_window">
-    <form action="">
+    <form action="{% url 'user:registration' %}" method="post">
+        {% csrf_token %}
         <h1>Register</h1>
         <div class="form-row">
             <div class="input-box">
-                <label>Username</label>
-                <input type="text" placeholder="Username" required>
+                <label for="id_username">Username</label>
+                <input type="text" id="id_username"
+                       value="{%if form.username.value%}{{form.username.value}}{% endif %}"
+                       name="username"
+                       placeholder="Username" required>
+                       {%if form.username.errors%}
+                       <div class="">{{form.username.errors}}</div>
+                       {% endif %}
             </div>
             <div class="input-box">
-                <label>Name</label>
-                <input type="text" placeholder="Name" required>
+                <label for="id_first_name">Name</label>
+                <input type="text" id="id_first_name"
+                       value="{%if form.first_name.value%}{{form.first_name.value}}{% endif %}"
+                       name="first_name"
+                       placeholder="Name" required>
+                {%if form.first_name.errors%}
+                       <div class="">{{form.first_name.errors}}</div>
+                       {% endif %}
             </div>
         </div>
         <div class="form-row">
             <div class="input-box">
-                <label>Email</label>
-                <input type="text" placeholder="Email" required>
+                <label for="id_email">Email</label>
+                <input type="text" id="id_email"
+                       value="{%if form.email.value%}{{form.email.value}}{% endif %}"
+                       name="email"
+                       placeholder="email" required>
+                {%if form.email.errors%}
+                       <div class="">{{form.email.errors}}</div>
+                       {% endif %}
             </div>
              <div class="input-box">
-                 <label>Number</label>
-                <input type="text" placeholder="Phone number" required>
+                 <label for="id_number">number</label>
+                <input type="text" id="id_number" value="{%if form.number.value%}{{form.number.value}}{% endif %}"
+                       name="number"
+                       placeholder="number" required>
+                 {%if form.number.errors%}
+                       <div class="">{{form.number.errors}}</div>
+                       {% endif %}
             </div>
         </div>
         <div class="form-row">
             <div class="input-box">
-                <label>Password</label>
-                <input type="Password" placeholder="Password" required>
+                <label for="id_password1">Password</label>
+                <input type="password" id="id_password1" value="{%if form.password1.value%}{{form.password1.value}}{% endif %}"
+                       name="password1"
+                       placeholder="password" required>
+                {%if form.password1.errors%}
+                       <div class="">{{form.password1.errors}}</div>
+                       {% endif %}
             </div>
             <div class="input-box">
-                <label>Confirmation</label>
-                <input type="password" placeholder="confirmation password" required>
+                <label for="id_password2">Confirmation</label>
+                <input type="Password" id="id_password2" value="{%if form.password2.value%}{{form.password2.value}}{% endif %}"
+                       name="password2"
+                       placeholder="confirmation password" required>
+                {%if form.password2.errors%}
+                       <div class="">{{form.password2.errors}}</div>
+                       {% endif %}
             </div>
         </div>
         <div class="remember-forgot">

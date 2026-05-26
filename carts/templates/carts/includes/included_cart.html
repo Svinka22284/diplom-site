@@ -1,66 +1,78 @@
 {% load static %}
+{% load carts_tags %}
+
+{% user_carts request as carts %}
+
 <button class="cart-btn" id="open-cart">
     🛒 Кошик
 </button>
+
 <div class="cart-overlay" id="cart-overlay"></div>
+
 <div class="cart-sidebar" id="cart-sidebar">
+
     <div class="cart-header">
         <h2>Корзина</h2>
+
         <a class="close-cart" id="open-user_cart"
-            href="{% url 'users:users_cart' %}">
-                Сторінка кошика
+           href="{% url 'users:users_cart' %}">
+            Сторінка кошика
         </a>
+
         <button class="close-cart" id="close-cart">
             ✖
         </button>
     </div>
+
     <div class="cart-items">
+
+        {% for cart in carts %}
+
         <div class="cart-item">
-            <img
-                src="https://via.placeholder.com/80"
-                alt=""
-            >
+
+            <img src="https://via.placeholder.com/80" alt="">
+
             <div class="cart-info">
-                <h4>Назва товара</h4>
-                <p>100 $</p>
+
+                <h4>{{ cart.product.name }}</h4>
+
+                <p>{{ cart.product.sell_price }}</p>
+
                 <div class="qty-box">
                     <button>-</button>
-                    <span>1</span>
+
+                    <span>{{ cart.quantity }}</span>
+
                     <button>+</button>
                 </div>
+
             </div>
+
             <button class="delete-item">
                 🗑
             </button>
+
         </div>
-        <div class="cart-item">
-            <img
-                src="https://via.placeholder.com/80"
-                alt=""
-            >
-            <div class="cart-info">
-                <h4>Название товара</h4>
-                <p>250 $</p>
-                <div class="qty-box">
-                    <button>-</button>
-                    <span>2</span>
-                    <button>+</button>
-                </div>
-            </div>
-            <button class="delete-item">
-                🗑
-            </button>
-        </div>
+
+        {% endfor %}
+
     </div>
+
     <div class="cart-footer">
+
         <div class="cart-total">
             <span>Итого:</span>
-            <strong>600 $</strong>
+            <strong>
+                {{ carts.total_price }}
+            </strong>
         </div>
+
         <button class="checkout-btn">
             Оформить заказ
         </button>
+
     </div>
+
 </div>
 <script>
 const openCart = document.getElementById('open-cart');

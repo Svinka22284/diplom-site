@@ -37,7 +37,10 @@
                 {% endif %}
                 {%endautoescape%}
             </a>
-            <button class="card__btn">додати в корзину</button>
+            <button class="card__btn">
+            <a href="{%url "cart:cart_add" product.slug%}"> додати в корзину
+            </a>
+            </button>
 
         </div>
             <div class="card__id">{{product.display_id}}</div>

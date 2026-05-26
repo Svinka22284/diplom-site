@@ -20,7 +20,10 @@
             {%endif%}
         </div>
         <h6 class="text-product">{{product.description}}</h6>
-        <button class="footer-button">Додати в корзину</button>
+        <button  class="footer-button">
+            <a href="{%url "cart:cart_add" product.slug%}"> додати в корзину
+            </a>
+        </button>
     </div>
 </div>
 {%endblock%}

@@ -1,72 +1,89 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% load carts_tags %}
+{% user_carts request as carts %}
+
 <div class="cart-page" id="user_carta">
+
     <div class="cart-shell">
+
         <div class="cart-header">
             <h1>Корзина</h1>
             <p>Проверьте товары перед оформлением заказа</p>
         </div>
+
         <div class="cart-grid">
+
             <div class="cart-items">
+
+                {% for cart in carts %}
+
                 <div class="cart-item">
+
                     <div class="cart-item-img">
                         <img src="https://via.placeholder.com/160" alt="product">
                     </div>
+
                     <div class="cart-item-main">
-                        <h3>iPhone 15 Pro</h3>
-                        <p class="cart-desc">Apple A17 Pro, Titanium, 256GB</p>
+
+                        <h3>{{ cart.product.name }}</h3>
+
+                        <p class="cart-desc">
+                            {{ cart.product.description }}
+                        </p>
+
                         <div class="cart-actions">
+
                             <div class="qty">
                                 <button>-</button>
-                                <span>1</span>
+
+                                <span>{{ cart.quantity }}</span>
+
                                 <button>+</button>
                             </div>
-                            <button class="remove">Удалить</button>
+
+                            <button class="remove">
+                                Удалить
+                            </button>
+
                         </div>
+
                     </div>
+
                     <div class="cart-item-price">
-                        <strong>1200 $</strong>
+                        <strong>{{ cart.product.sell_price }}</strong>
                     </div>
+
                 </div>
-                <div class="cart-item">
-                    <div class="cart-item-img">
-                        <img src="https://via.placeholder.com/160" alt="product">
-                    </div>
-                    <div class="cart-item-main">
-                        <h3>MacBook Air M2</h3>
-                        <p class="cart-desc">8GB RAM, 256GB SSD</p>
-                        <div class="cart-actions">
-                            <div class="qty">
-                                <button>-</button>
-                                <span>2</span>
-                                <button>+</button>
-                            </div>
-                            <button class="remove">Удалить</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-price">
-                        <strong>2400 $</strong>
-                    </div>
-                </div>
+
+                {% endfor %}
+
             </div>
+
             <div class="cart-summary">
+
                 <h2>Ваш заказ</h2>
+
                 <div class="row">
-                    <span>Товары (3)</span>
-                    <span>3600 $</span>
+                    <span>Товары</span>
+                    <span>{{ carts.count }}</span>
                 </div>
+
                 <div class="row">
                     <span>Скидка</span>
                     <span>-0 $</span>
                 </div>
+
                 <div class="row total">
                     <strong>Итого</strong>
-                    <strong>3600 $</strong>
+                    <strong>{{ carts.total_price }}</strong>
                 </div>
+
                 <button class="checkout">
                     Перейти к оформлению
                 </button>
+
                 <div class="secure">
                     🔒 Безопасная оплата
                 </div>
@@ -83,12 +100,18 @@
 
 .cart-page {
     min-height: 100vh;
+
     display: flex;
+    justify-content: center;
     align-items: flex-start;
-    align-items: center;
-    padding: 40px 20px;
-    margin-left: 500px;
-    margin-top: -700px;
+
+    padding: 10px 20px 40px;
+
+    box-sizing: border-box;
+
+    position: relative;
+    top: -400px;
+    right: -400px;
 }
 
 .cart-shell {
@@ -123,6 +146,7 @@
     display: grid;
     grid-template-columns: 1fr 320px;
     gap: 24px;
+    align-items: start;
 }
 
 
@@ -218,6 +242,8 @@
     border-radius: 18px;
     height: fit-content;
     border: 1px solid rgba(255,255,255,0.04);
+    position: sticky;
+    top: 20px;
 }
 .cart-summary h2 {
     margin-top: 0;

@@ -1,3 +1,6 @@
+
+{% load carts_tags %}
+{% user_carts request as carts %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,24 +13,25 @@
         </div>
         <div class="cart-grid">
             <div class="cart-items">
+                {% for cart in carts %}
                 <div class="cart-item">
                     <div class="cart-item-img">
                         <img src="https://via.placeholder.com/160" alt="product">
                     </div>
                     <div class="cart-item-main">
-                        <h3>iPhone 15 Pro</h3>
-                        <p class="cart-desc">Apple A17 Pro, Titanium, 256GB</p>
+                        <h3>{{ cart.product.name }}</h3>
+                        <p class="cart-desc">{{ cart.product.description }}</p>
                         <div class="cart-actions">
                             <div class="qty">
                                 <button>-</button>
-                                <span>1</span>
+                                <span>{{ cart.quantity }}</span>
                                 <button>+</button>
                             </div>
                             <button class="remove">Удалить</button>
                         </div>
                     </div>
                     <div class="cart-item-price">
-                        <strong>1200 $</strong>
+                        <strong>{{ cart.product.sell_price }}</strong>
                     </div>
                 </div>
                 <div class="cart-item">
@@ -35,27 +39,30 @@
                         <img src="https://via.placeholder.com/160" alt="product">
                     </div>
                     <div class="cart-item-main">
-                        <h3>MacBook Air M2</h3>
-                        <p class="cart-desc">8GB RAM, 256GB SSD</p>
+                        <h3>{{ cart.product.name }}</h3>
+                        <p class="cart-desc">{{ cart.product.description }}</p>
                         <div class="cart-actions">
                             <div class="qty">
                                 <button>-</button>
-                                <span>2</span>
+                                <span>{{ cart.quantity }}</span>
                                 <button>+</button>
                             </div>
                             <button class="remove">Удалить</button>
                         </div>
                     </div>
                     <div class="cart-item-price">
-                        <strong>2400 $</strong>
+                        <strong>{{ cart.product.sell_price }}</strong>
                     </div>
                 </div>
+                {% endfor %}
             </div>
+
             <div class="cart-summary">
                 <h2>Ваш заказ</h2>
                 <div class="row">
-                    <span>Товары (3)</span>
-                    <span>3600 $</span>
+                    <span>Товары</span>
+                      <span>{{ carts.count }}</span>
+                    <span>{{ carts.total_price }}</span>
                 </div>
                 <div class="row">
                     <span>Скидка</span>
@@ -63,11 +70,13 @@
                 </div>
                 <div class="row total">
                     <strong>Итого</strong>
-                    <strong>3600 $</strong>
+                    <strong>{{ carts.total_price }}</strong>
                 </div>
+
                 <button class="checkout">
                     Перейти к оформлению
                 </button>
+
                 <div class="secure">
                     🔒 Безопасная оплата
                 </div>

@@ -21,6 +21,7 @@
 
         <button class="close-cart" id="close-cart">
             ✖
+
         </button>
     </div>
 
@@ -49,7 +50,8 @@
             </div>
 
             <button class="delete-item">
-                🗑
+                <a href="{% url "cart:cart_remove" cart.id %}">
+                🗑</a>
             </button>
 
         </div>

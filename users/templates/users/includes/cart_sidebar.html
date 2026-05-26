@@ -27,27 +27,10 @@
                                 <span>{{ cart.quantity }}</span>
                                 <button>+</button>
                             </div>
-                            <button class="remove">Удалить</button>
-                        </div>
-                    </div>
-                    <div class="cart-item-price">
-                        <strong>{{ cart.product.sell_price }}</strong>
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <div class="cart-item-img">
-                        <img src="https://via.placeholder.com/160" alt="product">
-                    </div>
-                    <div class="cart-item-main">
-                        <h3>{{ cart.product.name }}</h3>
-                        <p class="cart-desc">{{ cart.product.description }}</p>
-                        <div class="cart-actions">
-                            <div class="qty">
-                                <button>-</button>
-                                <span>{{ cart.quantity }}</span>
-                                <button>+</button>
-                            </div>
-                            <button class="remove">Удалить</button>
+                            <button class="remove">
+                               <a href="{% url "cart:cart_remove" cart.id %}">
+                Удалить</a>    
+                            </button>
                         </div>
                     </div>
                     <div class="cart-item-price">

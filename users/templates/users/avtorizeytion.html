@@ -6,6 +6,9 @@
 <div class="wrapper_window">
     <form action="{% url 'user:avtorizeytion' %}" method="post">
     {%csrf_token%}
+        {%if request.GET.next%}
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% endif %}
         <h1>Login</h1>
         {%for item in form%}
         <div class="input-box">
@@ -20,7 +23,7 @@
         </div>
         <button type="submit" class="btn">Login</button>
         <div class="register-link">
-            <p>Don't have account?<a href="{%url 'users:registration' %}">Register</a><p>
+            <p>Don't have account?<a href="{%url 'users:registration' %}">Register</a></p>
         </div>
     </form>
 </div>

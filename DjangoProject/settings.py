@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+from django.conf.global_settings import LOGIN_URL
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'django.contrib.postgres',
     'users',
+    'carts',
 
 
 ]
@@ -145,4 +148,5 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-LOGIN_REDIRECT_URL = '/user/avtorizeytion/'
+LOGIN_URL = '/user/avtorizeytion/'
+LOGIN_REDIRECT_URL = '/user/profile/'

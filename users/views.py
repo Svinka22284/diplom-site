@@ -19,6 +19,9 @@ def avtorizeytion(request):
             if user:
                 auth.login(request, user)
                 messages.success(request,f"{username},Ви увійшли")
+                next_page = request.POST.get('next')
+                if next_page:
+                    return HttpResponseRedirect(next_page)
                 return HttpResponseRedirect(reverse('main:index'))
     else: form = UserLoginForm()
     context ={
@@ -65,6 +68,9 @@ def profile(request):
         'form': form
     }
     return render(request, 'users/profile.html', context)
+
+def users_cart(request):
+    return render(request,'users/users_cart.html')
 
 @login_required
 def logout(request):

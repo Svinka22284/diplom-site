@@ -4,123 +4,157 @@
 {% load static %}
 {%block content%}
 <div class="container-profile">
+
+    <!-- ЛЕВАЯ КОЛОНКА -->
+
     <div class="left-profile-container">
+
         <div class="card-profile">
+
             <h2 class="title-profile">
                 Профиль пользователя
             </h2>
-            <form action="{% url "users:profile" %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="avatar-profile">
-                {%if user.image%}
-                <img src="{{user.image.url}}">
-                {%else%}
-                <img src="{% static 'images/теремок.png' %}">
-                {%endif%}
-                  {%if form.image.errors%}
-                <div class="">{{form.image.errors}}</div>
-                    {%endif%}
-            </div>
-            <div class="file-profile">
-                <input type="file" id="id_image" name='image' accept="image/*">
-            </div>
-            <div class="form-group">
-                <label for="id_username">Логін*</label>
-                <input id="id_username" name="username"
-                       type="text" placeholder="Ведіть ваш логін"
-                value="{{form.username.value}}" required>
-                {%if form.username.errors%}
-                <div class="">{{form.username.errors}}</div>
-                    {%endif%}
-            </div>
-            <div class="form-group">
-                <label for="id_first_name">Ім'я*</label>
-                <input id="id_first_name" name="first_name"
-                       type="text" placeholder="Ведіть ваше ім'я"
-                value="{{form.first_name.value}}" required>
-                {%if form.first_name.errors%}
-                <div class="">{{form.first_name.errors}}</div>
-                    {%endif%}
-            </div>
-            <div class="form-group">
-                <label for="id_email">Email*</label>
-                <input id="id_email" name="email" type="text"
-                       placeholder="Ведіть вашу електрону адресу"
-                value="{{form.email.value}}" required>
-                {%if form.email.errors%}
-                <div class="">{{form.email.errors}}</div>
-                    {%endif%}
-            </div>
-            <div class="form-group">
-                <label for="id_number">Телефон*</label>
-                <input id="id_number" name="number" type="text"
-                       placeholder="Ведіть ваш номер телефону"
-                value="{{form.number.value}}" required>
-                {%if form.number.errors%}
-                <div class="">{{form.number.errors}}
-                    </div>
-                    {%endif%}
-            </div>
-            <button class="btn-profile">
-                Сохранить
-            </button>
-            <button class="btn-profile">
-                <a href="{%url 'user:logout'%}">
-                Вийти
+
+            <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="avatar-profile">
+
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}">
+                    {% else %}
+                        <img src="{% static 'images/теремок.png' %}">
+                    {% endif %}
+
+                    {% if form.image.errors %}
+                        <div>{{ form.image.errors }}</div>
+                    {% endif %}
+
+                </div>
+
+                <div class="file-profile">
+                    <input type="file" id="id_image" name="image" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_username">Логін*</label>
+
+                    <input
+                        id="id_username"
+                        name="username"
+                        type="text"
+                        placeholder="Ведіть ваш логін"
+                        value="{{ form.username.value }}"
+                        required
+                    >
+
+                    {% if form.username.errors %}
+                        <div>{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_first_name">Ім'я*</label>
+
+                    <input
+                        id="id_first_name"
+                        name="first_name"
+                        type="text"
+                        placeholder="Ведіть ваше ім'я"
+                        value="{{ form.first_name.value }}"
+                        required
+                    >
+
+                    {% if form.first_name.errors %}
+                        <div>{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_email">Email*</label>
+
+                    <input
+                        id="id_email"
+                        name="email"
+                        type="text"
+                        placeholder="Ведіть вашу електрону адресу"
+                        value="{{ form.email.value }}"
+                        required
+                    >
+
+                    {% if form.email.errors %}
+                        <div>{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_number">Телефон*</label>
+
+                    <input
+                        id="id_number"
+                        name="number"
+                        type="text"
+                        placeholder="Ведіть ваш номер телефону"
+                        value="{{ form.number.value }}"
+                        required
+                    >
+
+                    {% if form.number.errors %}
+                        <div>{{ form.number.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <button class="btn-profile">
+                    Сохранить
+                </button>
+
+                <a href="{% url 'user:logout' %}" class="btn-profile">
+                    Вийти
                 </a>
-            </button>
+
             </form>
+
         </div>
+
     </div>
+
+
+    <!-- ПРАВАЯ КОЛОНКА -->
+
     <div class="right-profile-container">
+
+        <!-- КОРЗИНА -->
+
+        {% include "users/includes/cart_sidebar.html" %}
+
+
+        <!-- ЗАКАЗЫ -->
+
         <div class="card-profile">
-            <h2 class="title-profile">
-                Корзина
-            </h2>
-            <div class="cart-box-profile">
-                <div class="cart-header-profile">
-                    Товар
-                </div>
-                <div class="cart-item-profile">
-                    <div class="qty-profile">
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                    </div>
-                    <div>
-                        x 100.00 =
-                    </div>
-                    <div class="price-profile">
-                        100.00 $
-                    </div>
-                    <div class="delete-profile">
-                        🗑
-                    </div>
-                </div>
-            </div>
-            <div class="summary-profile">
-                <p>Итого 1 товар(а) на сумму</p>
-                <h3>100.00 $</h3>
-            </div>
-            <button class="btn-profile order-btn-profile">
-                Оформить заказ
-            </button>
-        </div>
-        <div class="card-profile">
+
             <h2 class="title-profile">
                 Мои заказы
             </h2>
+
             <div class="order-profile">
+
                 <div class="order-top-profile">
+
                     <div>
                         Заказ № 256 - 09 сентября 2023 9:04 |
                         Статус:
                         <span>В обработке</span>
                     </div>
+
                     <div>⌃</div>
+
                 </div>
+
                 <div class="table-wrapper-profile">
+
                     <table class="table-profile">
+
                         <thead>
                             <tr>
                                 <th>Товар</th>
@@ -129,6 +163,7 @@
                                 <th>Общая стоимость</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             <tr>
                                 <td>
@@ -136,8 +171,11 @@
                                         Комплект стол и три стула
                                     </a>
                                 </td>
+
                                 <td>1</td>
+
                                 <td>255.00 $</td>
+
                                 <td>255.00 $</td>
                             </tr>
                         </tbody>
@@ -150,7 +188,6 @@
             </div>
         </div>
     </div>
-
 </div>
-
 {% endblock %}
+

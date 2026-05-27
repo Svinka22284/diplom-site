@@ -33,6 +33,7 @@
 </header>
 <img class="picture-logo" src="{% static 'images/теремок.png' %}">
 {% block extra_ui %}
+
 <div class="content-wrapper">
     <aside class="left-sidebar">
     <div class="dropdown_meny_catalog">
@@ -107,9 +108,8 @@
     </ul>
 </div>
     </aside>
-
+    {% include "carts/includes/included_cart.html" %}
 </div>
-{% include "carts/includes/included_cart.html" %}
 <form class="d-flex" role="search" action="{%url "catalog:search" %}" method="get">
 <div class="search-box">
     <input class="search-txt"  type="search" name="q" id="searchinput" placeholder="Шукати">
@@ -167,6 +167,8 @@
 </div>
 <script src="{% static 'js/Javamain.js' %}"></script>
 <script src="{% static 'js/Speech AP.js' %}"></script>
+<script src="{% static 'js/jquery/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'js/jquery/jquery-ajax.js' %}"></script>
 <script src="{% static 'js/list.js' %}"></script>
 </body>
 </html>

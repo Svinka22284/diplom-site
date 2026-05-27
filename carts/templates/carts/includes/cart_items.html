@@ -1,0 +1,30 @@
+{% for cart in carts %}
+
+        <div class="cart-item">
+
+            <img src="https://via.placeholder.com/80" alt="">
+
+            <div class="cart-info">
+
+                <h4>{{ cart.product.name }}</h4>
+
+                <p>{{ cart.product.sell_price }}</p>
+
+                <div class="qty-box">
+                    <button>-</button>
+
+                    <span>{{ cart.quantity }}</span>
+
+                    <button>+</button>
+                </div>
+
+            </div>
+
+            <button class="delete-item">
+                <a href="{% url "cart:cart_remove"  %}">
+                🗑</a>
+            </button>
+
+        </div>
+
+        {% endfor %}

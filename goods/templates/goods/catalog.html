@@ -38,13 +38,15 @@
                 {%endautoescape%}
             </a>
             <button class="card__btn">
-            <a href="{%url "cart:cart_add" product.slug%}"> додати в корзину
+            <a href="{%url "cart:cart_add" %}" class="add-to-cart" data-product-id="{{product.id}}">
+                {% csrf_token %}
+                додати в корзину
             </a>
             </button>
 
         </div>
             <div class="card__id">{{product.display_id}}</div>
-    </div>
+        </div>
 
 </div>
 {% endfor %}

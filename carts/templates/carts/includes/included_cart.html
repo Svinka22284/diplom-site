@@ -25,44 +25,15 @@
         </button>
     </div>
 
-    <div class="cart-items">
+    <div class="cart-items" id="cart-items-container">
 
-        {% for cart in carts %}
-
-        <div class="cart-item">
-
-            <img src="https://via.placeholder.com/80" alt="">
-
-            <div class="cart-info">
-
-                <h4>{{ cart.product.name }}</h4>
-
-                <p>{{ cart.product.sell_price }}</p>
-
-                <div class="qty-box">
-                    <button>-</button>
-
-                    <span>{{ cart.quantity }}</span>
-
-                    <button>+</button>
-                </div>
-
-            </div>
-
-            <button class="delete-item">
-                <a href="{% url "cart:cart_remove" cart.id %}">
-                🗑</a>
-            </button>
-
-        </div>
-
-        {% endfor %}
+    {% include "carts/includes/cart_items.html" %}
 
     </div>
 
     <div class="cart-footer">
 
-        <div class="cart-total">
+        <div class="cart-total" id="cart-total-price">
             <span>Итого:</span>
             <strong>
                 {{ carts.total_price }}

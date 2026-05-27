@@ -21,7 +21,9 @@
         </div>
         <h6 class="text-product">{{product.description}}</h6>
         <button  class="footer-button">
-            <a href="{%url "cart:cart_add" product.slug%}"> додати в корзину
+           <a href="{%url "cart:cart_add" %}" class=" add-to-cart" data-product-id="{{product.id}}">
+                {% csrf_token %}
+                додати в кошик
             </a>
         </button>
     </div>

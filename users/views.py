@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from carts.models import Cart
 from users.forms import UserLoginForm, UserRegistrationForm, ProfileForm
 
 
@@ -16,9 +17,14 @@ def avtorizeytion(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
+
+            session_key = request.session.session_key
+
             if user:
                 auth.login(request, user)
                 messages.success(request,f"{username},Ви увійшли")
+                if session_key:
+                    Cart.objects.filter(session_key=session_key).update(user=user)
                 next_page = request.POST.get('next')
                 if next_page:
                     return HttpResponseRedirect(next_page)
@@ -37,8 +43,11 @@ def registration(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            session_key = request.session.session_key
             user = form.instance
             auth.login(request, user)
+            if session_key:
+                Cart.objects.filter(session_key=session_key).update(user=user)
             messages.success(request, f"{user.username},Ви успішно зареєструвалися")
             return HttpResponseRedirect(reverse('main:index'))
     else:

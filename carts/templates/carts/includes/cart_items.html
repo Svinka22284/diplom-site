@@ -20,10 +20,11 @@
 
             </div>
 
-            <button class="delete-item">
-                <a href="{% url "cart:cart_remove"  %}">
-                🗑</a>
-            </button>
+            <a href="#"
+   class="remove-from-cart"
+   data-cart-id="{{ cart.id }}">
+    🗑
+</a>
 
         </div>
 

@@ -48,7 +48,33 @@ def cart_change(request, product_slug):
 
 
 
-def cart_remove(request, cart_id):
-    cart = Cart.objects.get(id=cart_id)
+def cart_remove(request):
+    cart_id = request.POST.get("cart_id")
+
+    cart = Cart.objects.filter(id=cart_id).first()
+
+    if not cart:
+        return JsonResponse({"error": "not found"}, status=404)
+
+    quantity = cart.quantity
     cart.delete()
-    return redirect(request.META['HTTP_REFERER'])
+
+    user_cart = get_user_cart(request)
+
+    cart_items_html = render_to_string(
+        "carts/includes/cart_items.html",
+        {"carts": user_cart},
+        request=request
+    )
+
+    total_price = sum(
+        cart.product.sell_price() * cart.quantity
+        for cart in user_cart
+    )
+
+    return JsonResponse({
+        "message": "deleted",
+        "cart_items_html": cart_items_html,
+        "quantity_deleted": quantity,
+        "total_price": total_price,
+    })

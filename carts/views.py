@@ -42,11 +42,28 @@ def cart_add(request):
     return JsonResponse(response_data)
 
 
-def cart_change(request, product_slug):
-    pass
-
-
-
+def cart_change(request):
+    cart_id = request.POST.get("cart_id")
+    quantity = request.POST.get("quantity")
+    cart = Cart.objects.get(id=cart_id)
+    cart.quantity = int(quantity)
+    cart.save()
+    user_cart = get_user_cart(request)
+    total_price = sum(
+        cart.product.sell_price() * cart.quantity
+        for cart in user_cart
+    )
+    cart_items_html = render_to_string(
+        "carts/includes/cart_items.html",
+        {"carts": user_cart},
+        request=request
+    )
+    response_data = {
+        "message": "Количество изменено",
+        "cart_items_html": cart_items_html,
+        "total_price": total_price,
+    }
+    return JsonResponse(response_data)
 
 def cart_remove(request):
     cart_id = request.POST.get("cart_id")

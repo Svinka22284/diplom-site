@@ -11,11 +11,17 @@
                 <p>{{ cart.product.sell_price }}</p>
 
                 <div class="qty-box">
-                    <button>-</button>
+                    <button  class="decrement" data-cart-id="{{cart.id}}" data-cart-change-url="{%url "cart:cart_change" %}">
 
-                    <span>{{ cart.quantity }}</span>
+                    -</button>
 
-                    <button>+</button>
+                    <span class="number">
+                        {{ cart.quantity }}
+                    </span>
+
+                    <button  class="increment" data-cart-id="{{cart.id}}" data-cart-change-url="{%url "cart:cart_change" %}">
+
+                    +</button>
                 </div>
 
             </div>

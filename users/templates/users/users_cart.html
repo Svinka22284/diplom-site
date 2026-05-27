@@ -5,53 +5,48 @@
 {% user_carts request as carts %}
 
 <div class="cart-page" id="user_carta">
-
     <div class="cart-shell">
-
         <div class="cart-header">
             <h1>Корзина</h1>
             <p>Проверьте товары перед оформлением заказа</p>
         </div>
-
         <div class="cart-grid">
-
-            <div class="cart-items">
-
+            <div class="cart-items" id="cart-items-container">
                 {% for cart in carts %}
-
                 <div class="cart-item" >
-
                     <div class="cart-item-img">
                         <img src="https://via.placeholder.com/160" alt="product">
                     </div>
-
                     <div class="cart-item-main">
-
                         <h3>{{ cart.product.name }}</h3>
-
                         <p class="cart-desc">
                             {{ cart.product.description }}
                         </p>
-
                         <div class="cart-actions">
-
-                            <div class="qty">
-                                <button>-</button>
-
-                                <span>{{ cart.quantity }}</span>
-
-                                <button>+</button>
-                            </div>
-
-                            <button class="remove">
-                               <a href="{% url "cart:cart_remove" cart.id %}">
-                Удалить</a>
+                                <div class="qty">
+                        <button class="decrement"
+                        data-cart-id="{{ cart.id }}"
+                        data-cart-change-url="{% url 'cart:cart_change' %}">
+                            -
+                        </button>
+                        <span class="number">
+                        {{ cart.quantity }}
+                            </span>
+                            <button class="increment"
+                                    data-cart-id="{{ cart.id }}"
+                                    data-cart-change-url="{% url 'cart:cart_change' %}">
+                                +
                             </button>
-
+                            </div>
+                                <button class="cart-remove">
+                               <a href="#"
+                                    class="remove-from-cart"
+                                    data-cart-id="{{ cart.id }}">
+                                     🗑
+                                </a>
+                            </button>
                         </div>
-
                     </div>
-
                     <div class="cart-item-price">
                         <strong>{{ cart.product.sell_price }}</strong>
                     </div>
@@ -76,9 +71,11 @@
                     <span>-0 $</span>
                 </div>
 
-                <div class="row total">
-                    <strong>Итого</strong>
-                    <strong>{{ carts.total_price }}</strong>
+                <div class="row total" id="cart-total-price">
+                   <span>Итого:</span>
+                    <strong>
+                        {{ carts.total_price }}
+                    </strong>
                 </div>
 
                 <button class="checkout">

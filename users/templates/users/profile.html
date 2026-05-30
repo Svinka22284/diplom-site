@@ -133,61 +133,92 @@
 
         <div class="card-profile">
 
-            <h2 class="title-profile">
-                Мои заказы
-            </h2>
+    <h2 class="title-profile">
+        Мои заказы
+    </h2>
 
-            <div class="order-profile">
+    <div class="order-profile">
 
-                <div class="order-top-profile">
+        {% for order in orders %}
 
-                    <div>
-                        Заказ № 256 - 09 сентября 2023 9:04 |
-                        Статус:
-                        <span>В обработке</span>
-                    </div>
+        <div class="order-top-profile" onclick="toggleOrder('{{ order.id }}')">
 
-                    <div>⌃</div>
+            <div>
+                Заказ № {{order.id}} - {{order.created_timestamp}} |
+                Статус:
+                <span>{{order.status}}</span>
+            </div>
 
-                </div>
+            <div id="arrow-{{ order.id }}">⌃</div>
 
-                <div class="table-wrapper-profile">
+        </div>
 
-                    <table class="table-profile">
+        <div id="order-{{order.id}}" class="table-wrapper-profile"
+             {% if not order == orders.0 %}style="display: none;"{% endif %}>
 
-                        <thead>
-                            <tr>
-                                <th>Товар</th>
-                                <th>Количество</th>
-                                <th>Цена</th>
-                                <th>Общая стоимость</th>
-                            </tr>
-                        </thead>
+            <table class="table-profile">
 
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#">
-                                        Комплект стол и три стула
-                                    </a>
-                                </td>
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Общая стоимость</th>
+                    </tr>
+                </thead>
 
-                                <td>1</td>
+                <tbody>
+                {% for item in order.orderitem_set.all %}
+                    <tr>
 
-                                <td>255.00 $</td>
+                        <td>
+                            <a href="{% url 'goods:product' item.product.slug %}">
+                                {{item.product.name}}
+                            </a>
+                        </td>
 
-                                <td>255.00 $</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="total-profile">
-                    <div>Итого:</div>
-                    <div>255.00 $</div>
+                        <td>{{item.quantity}}</td>
+
+                        <td>{{item.price}}</td>
+
+                        <td>{{item.product_price}}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+            <div class="total-profile">
+                <div>Итого:</div>
+                <div>
+                    <strong>{{ order.total_price1 }}</strong>
                 </div>
             </div>
+
         </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
     </div>
 </div>
+<script>
+    function toggleOrder(orderId) {
+
+        const orderBlock = document.getElementById(`order-${orderId}`);
+        const arrow = document.getElementById(`arrow-${orderId}`);
+
+        if (orderBlock.style.display === "none") {
+            orderBlock.style.display = "block";
+            arrow.innerHTML = "⌃";
+        } else {
+            orderBlock.style.display = "none";
+            arrow.innerHTML = "⌄";
+        }
+    }
+</script>
 {% endblock %}
 

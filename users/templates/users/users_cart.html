@@ -74,12 +74,14 @@
                 <div class="row total" id="cart-total-price">
                    <span>Итого:</span>
                     <strong>
-                        {{ carts.total_price }}
+                        {{ carts.sell_price }}
                     </strong>
                 </div>
 
                 <button class="checkout">
+                    <a href="{% url "orders:create_order"%}">
                     Перейти к оформлению
+                    </a>
                 </button>
 
                 <div class="secure">

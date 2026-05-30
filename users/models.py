@@ -9,6 +9,7 @@ class User(AbstractUser):
         blank=True,
         null=True,
         verbose_name="Номер телефону")
+    
     class Meta:
         db_table = 'user'
         verbose_name = 'Користувач'

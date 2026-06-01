@@ -2,3 +2,9 @@ venv/
 .pulintec
 .idea
 db.sqlite3
+github-actions-key
+github-actions-key.pub
+github-deploy-key
+github-deploy-key.pub
+__pycache__/
+*.pyc

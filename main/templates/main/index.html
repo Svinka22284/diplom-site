@@ -1,2 +1,46 @@
 {% extends 'base.html' %}
+{% block extra_ui %}
+{% load static %}
+{% endblock %}
+{%load goods_tags%}
+{% block content %}
+{% include "carts/includes/included_cart.html" %}
+<div class="hero">
+    <h1>Купуй легко. Живи зручно.</h1>
+    <p>Швидкий пошук, вигідні ціни, просте оформлення</p>
+</div>
+<form class="d-flex" role="search" action="{% url 'catalog:search' %}" method="get">
+    <div class="search-box">
+        <input class="search-txt" type="search" name="q" id="searchinput" placeholder="Шукати">
 
+        <button class="search-box_btn">
+            <img class="picture" src="{% static 'images/лупа.png' %}">
+        </button>
+
+        <button class="search-box_btn" id="voicebtn" type="button">
+            <img class="picture" src="{% static 'images/800309.png' %}">
+        </button>
+    </div>
+</form>
+<div class="main-categories">
+
+    {% for category in categories %}
+    <div class="container-categories-index">
+        <a href="{% url 'catalog:index' category.slug %}" class="category-card-silka">
+        <div class="category-title"> {{ category.name }}</div>
+        </a>
+        {% if category.image %}
+        <a href="{% url 'catalog:index' category.slug %}" class="category-card-silka">
+    <img src="{{ category.image.url }}" alt="{{ category.name }}">
+        </a>
+{% else %}
+    <img src="/static/img/no-image.png" alt="Нет изображения">
+{% endif %}
+    </div>
+    {% empty %}
+    <p>Категорий нет</p>
+        {% endfor %}
+
+</div>
+
+{% endblock %}

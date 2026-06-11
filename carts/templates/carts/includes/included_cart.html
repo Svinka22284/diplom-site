@@ -12,10 +12,10 @@
 <div class="cart-sidebar" id="cart-sidebar">
 {% csrf_token %}
     <div class="cart-header">
-        <h2>Корзина</h2>
+        <h2>Кошик</h2>
 
         <a class="close-cart" id="open-user_cart"
-           href="{% url 'users:users_cart' %}">
+           href="{% url 'user:users_cart' %}">
             Сторінка кошика
         </a>
 
@@ -34,7 +34,7 @@
     <div class="cart-footer">
 
         <div class="cart-total" id="cart-total-price">
-            <span>Итого:</span>
+            <span>Разом:</span>
             <strong>
                 {{ carts.total_price }}
             </strong>
@@ -42,7 +42,7 @@
 
         <button class="checkout-btn">
             <a href="{% url "orders:create_order"%}">
-            Оформить заказ
+            Оформити замовлення
             </a>
         </button>
 
@@ -54,16 +54,16 @@ const openCart = document.getElementById('open-cart');
 const closeCart = document.getElementById('close-cart');
 const cartSidebar = document.getElementById('cart-sidebar');
 const cartOverlay = document.getElementById('cart-overlay');
+function closeCartSidebar() {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+    openCart.classList.remove('cart-btn--hidden');
+}
 openCart.addEventListener('click', () => {
     cartSidebar.classList.add('active');
     cartOverlay.classList.add('active');
+    openCart.classList.add('cart-btn--hidden');
 });
-closeCart.addEventListener('click', () => {
-    cartSidebar.classList.remove('active');
-    cartOverlay.classList.remove('active');
-});
-cartOverlay.addEventListener('click', () => {
-    cartSidebar.classList.remove('active');
-    cartOverlay.classList.remove('active');
-});
+closeCart.addEventListener('click', closeCartSidebar);
+cartOverlay.addEventListener('click', closeCartSidebar);
 </script>

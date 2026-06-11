@@ -7,26 +7,18 @@ const cartSidebar = document.getElementById('cart-sidebar');
 
 const cartOverlay = document.getElementById('cart-overlay');
 
+function closeCartSidebar() {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+    openCart.classList.remove('cart-btn--hidden');
+}
+
 openCart.addEventListener('click', () => {
-
     cartSidebar.classList.add('active');
-
     cartOverlay.classList.add('active');
-
+    openCart.classList.add('cart-btn--hidden');
 });
 
-closeCart.addEventListener('click', () => {
+closeCart.addEventListener('click', closeCartSidebar);
 
-    cartSidebar.classList.remove('active');
-
-    cartOverlay.classList.remove('active');
-
-});
-
-cartOverlay.addEventListener('click', () => {
-
-    cartSidebar.classList.remove('active');
-
-    cartOverlay.classList.remove('active');
-
-});
+cartOverlay.addEventListener('click', closeCartSidebar);

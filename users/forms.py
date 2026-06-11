@@ -7,17 +7,16 @@ from users.models import User
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
-        label='Username',
-
+        label='Логін',
         widget=forms.TextInput(attrs={"autofocus": True,
                                       "class": "input-box",
-                                      "placeholder": "username"}),
+                                      "placeholder": "Введіть логін"}),
     )
     password = forms.CharField(
-        label='Password',
+        label='Пароль',
         widget=forms.PasswordInput(attrs={"autocomplete":"current-password",
-                                                                 'class': 'input-box',
-                                                                 'placeholder': 'password'}))
+                                          'class': 'input-box',
+                                          'placeholder': 'Введіть пароль'}))
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -25,27 +24,27 @@ class UserLoginForm(AuthenticationForm):
 class UserRegistrationForm(UserCreationForm):
         username= forms.CharField(
             widget=forms.TextInput(attrs={"class": "input-box",
-                                          "placeholder":"username"})
+                                          "placeholder": "Введіть логін"})
         )
         first_name = forms.CharField(
             widget=forms.TextInput(attrs={"class": "input-box",
-                                          "placeholder": "first_name"})
+                                          "placeholder": "Введіть ім'я"})
         )
         email = forms.CharField(
             widget=forms.TextInput(attrs={"class": "input-box",
-                                          "placeholder": "email"})
+                                          "placeholder": "Введіть електронну пошту"})
         )
         number = forms.CharField(
             widget=forms.TextInput(attrs={"class": "input-box",
-                                          "placeholder": "number"})
+                                          "placeholder": "Введіть номер телефону"})
         )
         password1 = forms.CharField(
             widget=forms.TextInput(attrs={"class": "input-box",
-                                          "placeholder": "password"})
+                                          "placeholder": "Введіть пароль"})
         )
         password2 = forms.CharField(
             widget=forms.TextInput(attrs={"class": "input-box",
-                                          "placeholder": "confirmation password"})
+                                          "placeholder": "Підтвердіть пароль"})
         )
 
         class Meta:

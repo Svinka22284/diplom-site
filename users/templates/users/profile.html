@@ -1,36 +1,31 @@
 {% extends 'base.html' %}
-{% block extra_ui %}
-{% endblock %}
 {% load static %}
-{%block content%}
+
+{% block layout_class %}layout-page--full{% endblock %}
+{% block extra_ui %}{% endblock %}
+{% block search_area %}{% endblock %}
+{% block header_search %}{% endblock %}
+{% block cart_ui %}{% endblock %}
+
+{% block content %}
 <div class="container-profile">
 
-    <!-- ЛЕВАЯ КОЛОНКА -->
-
     <div class="left-profile-container">
-
         <div class="card-profile">
+            <h2 class="title-profile">Профіль користувача</h2>
 
-            <h2 class="title-profile">
-                Профиль пользователя
-            </h2>
-
-            <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
-
+            <form action="{% url 'user:profile' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="avatar-profile">
-
                     {% if user.image %}
-                        <img src="{{ user.image.url }}">
+                        <img src="{{ user.image.url }}" alt="Аватар">
                     {% else %}
-                        <img src="{% static 'images/теремок.png' %}">
+                        <img src="{% static 'images/теремок.png' %}" alt="Аватар">
                     {% endif %}
-
                     {% if form.image.errors %}
                         <div>{{ form.image.errors }}</div>
                     {% endif %}
-
                 </div>
 
                 <div class="file-profile">
@@ -39,178 +34,87 @@
 
                 <div class="form-group">
                     <label for="id_username">Логін*</label>
-
-                    <input
-                        id="id_username"
-                        name="username"
-                        type="text"
-                        placeholder="Ведіть ваш логін"
-                        value="{{ form.username.value }}"
-                        required
-                    >
-
-                    {% if form.username.errors %}
-                        <div>{{ form.username.errors }}</div>
-                    {% endif %}
+                    <input id="id_username" name="username" type="text" placeholder="Ведіть ваш логін" value="{{ form.username.value }}" required>
+                    {% if form.username.errors %}<div>{{ form.username.errors }}</div>{% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="id_first_name">Ім'я*</label>
-
-                    <input
-                        id="id_first_name"
-                        name="first_name"
-                        type="text"
-                        placeholder="Ведіть ваше ім'я"
-                        value="{{ form.first_name.value }}"
-                        required
-                    >
-
-                    {% if form.first_name.errors %}
-                        <div>{{ form.first_name.errors }}</div>
-                    {% endif %}
+                    <input id="id_first_name" name="first_name" type="text" placeholder="Ведіть ваше ім'я" value="{{ form.first_name.value }}" required>
+                    {% if form.first_name.errors %}<div>{{ form.first_name.errors }}</div>{% endif %}
                 </div>
 
                 <div class="form-group">
-                    <label for="id_email">Email*</label>
-
-                    <input
-                        id="id_email"
-                        name="email"
-                        type="text"
-                        placeholder="Ведіть вашу електрону адресу"
-                        value="{{ form.email.value }}"
-                        required
-                    >
-
-                    {% if form.email.errors %}
-                        <div>{{ form.email.errors }}</div>
-                    {% endif %}
+                    <label for="id_email">Електронна пошта*</label>
+                    <input id="id_email" name="email" type="text" placeholder="Ведіть вашу електрону адресу" value="{{ form.email.value }}" required>
+                    {% if form.email.errors %}<div>{{ form.email.errors }}</div>{% endif %}
                 </div>
 
                 <div class="form-group">
                     <label for="id_number">Телефон*</label>
-
-                    <input
-                        id="id_number"
-                        name="number"
-                        type="text"
-                        placeholder="Ведіть ваш номер телефону"
-                        value="{{ form.number.value }}"
-                        required
-                    >
-
-                    {% if form.number.errors %}
-                        <div>{{ form.number.errors }}</div>
-                    {% endif %}
+                    <input id="id_number" name="number" type="text" placeholder="Ведіть ваш номер телефону" value="{{ form.number.value }}" required>
+                    {% if form.number.errors %}<div>{{ form.number.errors }}</div>{% endif %}
                 </div>
 
-                <button class="btn-profile">
-                    Сохранить
-                </button>
-
-                <a href="{% url 'user:logout' %}" class="btn-profile">
-                    Вийти
-                </a>
-
+                <button class="btn-profile" type="submit">Зберегти</button>
+                <a href="{% url 'user:logout' %}" class="btn-profile">Вийти</a>
             </form>
-
         </div>
-
     </div>
-
-
-    <!-- ПРАВАЯ КОЛОНКА -->
 
     <div class="right-profile-container">
-
-        <!-- КОРЗИНА -->
-
         {% include "users/includes/cart_sidebar.html" %}
 
-
-        <!-- ЗАКАЗЫ -->
-
         <div class="card-profile">
-
-    <h2 class="title-profile">
-        Мои заказы
-    </h2>
-
-    <div class="order-profile">
-
-        {% for order in orders %}
-
-        <div class="order-top-profile" onclick="toggleOrder('{{ order.id }}')">
-
-            <div>
-                Заказ № {{order.id}} - {{order.created_timestamp}} |
-                Статус:
-                <span>{{order.status}}</span>
-            </div>
-
-            <div id="arrow-{{ order.id }}">⌃</div>
-
-        </div>
-
-        <div id="order-{{order.id}}" class="table-wrapper-profile"
-             {% if not order == orders.0 %}style="display: none;"{% endif %}>
-
-            <table class="table-profile">
-
-                <thead>
-                    <tr>
-                        <th>Товар</th>
-                        <th>Количество</th>
-                        <th>Цена</th>
-                        <th>Общая стоимость</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                {% for item in order.orderitem_set.all %}
-                    <tr>
-
-                        <td>
-                            <a href="{% url 'goods:product' item.product.slug %}">
-                                {{item.product.name}}
-                            </a>
-                        </td>
-
-                        <td>{{item.quantity}}</td>
-
-                        <td>{{item.price}}</td>
-
-                        <td>{{item.product_price}}</td>
-
-                    </tr>
-                {% endfor %}
-                </tbody>
-
-            </table>
-
-            <div class="total-profile">
-                <div>Итого:</div>
-                <div>
-                    <strong>{{ order.total_price1 }}</strong>
+            <h2 class="title-profile">Мої замовлення</h2>
+            <div class="order-profile">
+                {% for order in orders %}
+                <div class="order-top-profile" onclick="toggleOrder('{{ order.id }}')">
+                    <div>
+                        Замовлення № {{ order.id }} - {{ order.created_timestamp }} |
+                        Статус: <span>{{ order.status }}</span>
+                    </div>
+                    <div id="arrow-{{ order.id }}">⌃</div>
                 </div>
+
+                <div id="order-{{ order.id }}" class="table-wrapper-profile"{% if not order == orders.0 %} style="display: none;"{% endif %}>
+                    <table class="table-profile">
+                        <thead>
+                            <tr>
+                                <th>Товар</th>
+                                <th>Кількість</th>
+                                <th>Ціна</th>
+                                <th>Загальна вартість</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in order.orderitem_set.all %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'goods:product' item.product.slug %}">{{ item.product.name }}</a>
+                                </td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.price }}</td>
+                                <td>{{ item.product_price }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="total-profile">
+                        <div>Разом:</div>
+                        <div><strong>{{ order.total_price1 }}</strong></div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-
         </div>
-
-        {% endfor %}
-
-    </div>
-
-</div>
     </div>
 </div>
+
 <script>
     function toggleOrder(orderId) {
-
         const orderBlock = document.getElementById(`order-${orderId}`);
         const arrow = document.getElementById(`arrow-${orderId}`);
-
         if (orderBlock.style.display === "none") {
             orderBlock.style.display = "block";
             arrow.innerHTML = "⌃";
@@ -221,4 +125,3 @@
     }
 </script>
 {% endblock %}
-

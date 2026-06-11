@@ -1,85 +1,88 @@
-{%extends "base.html"%}
-{% load static %}
+{% extends 'base.html' %}
 {% load carts_tags %}
-{%block content%}
 
-<div class="boss-conteiner">
+{% block layout_class %}layout-page--full{% endblock %}
+{% block extra_ui %}{% endblock %}
+{% block search_area %}{% endblock %}
+{% block header_search %}{% endblock %}
+{% block cart_ui %}{% endblock %}
+
+{% block content %}
+<div class="page-checkout boss-conteiner">
     <div class="order-conteyner">
-    {% user_carts request as carts %}
-    {% include "users/includes/cart_sidebar.html" %}
+        {% user_carts request as carts %}
+        {% include "users/includes/cart_sidebar.html" %}
     </div>
-    <form action="{% url "orders:create_order" %}" method="post">
-    {% csrf_token %}
-    {{ form.errors }}
-    <div class="cantainer-details">
-        <h4>Детали заказа</h4>
-        <div class="form-row">
-            <div class="input-up">
-                <label>Имя*:</label>
-                <input type="text " name="first_name"
-                       value="{%if form.first_name.value%}{{form.first_name.value}}{% endif %}">
-             {%if form.first_name.errors%}
-                       <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
-                       {% endif %}
-            </div>
-            <div class="input-up">
-                <label>Фамилия*:</label>
-                <input type="text" name="last_name" value="{%if form.last_name.value%}{{form.last_name.value}}{% endif %}">
-            {%if form.last_name.errors%}
-                       <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
-                       {% endif %}
-            </div>
-        </div>
-        <div class="form-row">
 
-            <div class="input-up">
-                <label>Номер телефона*:</label>
-                <input type="text" name="number" placeholder="В формате: XXX-XXX-XX-XX"
-                 value="{%if form.number.value%}{{form.number.value}}{% endif %}">
-            {%if form.number.errors%}
-                       <div class="alert alert-danger alert-dismissible fade show">{{form.number.errors}}</div>
-                       {% endif %}
+    <form action="{% url 'orders:create_order' %}" method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+        <div class="cantainer-details">
+            <h4>Деталі замовлення</h4>
+
+            <div class="form-row">
+                <div class="input-up">
+                    <label>Ім'я*:</label>
+                    <input type="text" name="first_name" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}">
+                    {% if form.first_name.errors %}
+                    <div class="alert alert-danger">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="input-up">
+                    <label>Прізвище*:</label>
+                    <input type="text" name="last_name" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}">
+                    {% if form.last_name.errors %}
+                    <div class="alert alert-danger">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
             </div>
 
-        </div>
-        <div class="radio-group">
-            <span class="radio-title">Способ доставки:</span>
-            <label>
-                <input type="radio"  name="requires_delivery" value="1" checked>
-                Нужна доставка
-            </label>
-            <label>
-                <input type="radio" name="requires_delivery" value="0">
-                Самовывоз
-            </label>
-        </div>
-        <div class="form-row">
-            <div class="input-up">
-                <label>Адрес доставки*:</label>
-                <textarea name="delivery_address" value="{%if form.delivery_address.value%}{{form.delivery_address.value}}{% endif %}"></textarea>
-            {%if form.delivery_address.errors%}
-                       <div class="alert alert-danger alert-dismissible fade show">{{form.delivery_address.errors}}</div>
-                       {% endif %}
+            <div class="form-row">
+                <div class="input-up">
+                    <label>Номер телефону*:</label>
+                    <input type="text" name="number" placeholder="У форматі: XXX-XXX-XX-XX" value="{% if form.number.value %}{{ form.number.value }}{% endif %}">
+                    {% if form.number.errors %}
+                    <div class="alert alert-danger">{{ form.number.errors }}</div>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="radio-group">
-            <span class="radio-title">Способ оплаты:</span>
-            <label>
-                <input type="radio" name="payment_on_get" value="1" checked>
-                Оплата картой
-            </label>
-            <label>
-                <input type="radio" name="payment_on_get" value="0">
-                Наличными/картой при получении
-            </label>
-        </div>
-        <button class="order-btn">
-            Оформить заказ
-        </button>
 
-    </div>
+            <div class="radio-group">
+                <span class="radio-title">Спосіб доставки:</span>
+                <label>
+                    <input type="radio" name="requires_delivery" value="1" checked>
+                    Потрібна доставка
+                </label>
+                <label>
+                    <input type="radio" name="requires_delivery" value="0">
+                    Самовивіз
+                </label>
+            </div>
+
+            <div class="form-row">
+                <div class="input-up">
+                    <label>Адреса доставки*:</label>
+                    <textarea name="delivery_address">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
+                    {% if form.delivery_address.errors %}
+                    <div class="alert alert-danger">{{ form.delivery_address.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="radio-group">
+                <span class="radio-title">Спосіб оплати:</span>
+                <label>
+                    <input type="radio" name="payment_on_get" value="1" checked>
+                    Оплата карткою
+                </label>
+                <label>
+                    <input type="radio" name="payment_on_get" value="0">
+                    Готівкою/карткою при отриманні
+                </label>
+            </div>
+
+            <button class="order-btn" type="submit">Оформити замовлення</button>
+        </div>
     </form>
 </div>
-{%endblock%}
-
-
+{% endblock %}

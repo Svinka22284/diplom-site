@@ -1,183 +1,150 @@
 {% load static %}
-{%load goods_tags%}
+{% load goods_tags %}
 
-<!Doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Магазин</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
 </head>
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
-<header class="main-header">
-    <nav class="main-nav">
-        <a href="#">Доставка та оплата</a>
-        <a href="#">Контакти</a>
-        <a href="#">Питання та відповіді</a>
-        <a href="#">Знаходження магазинів</a>
-        <a href="{%url "users:profile"%}">профіль</a>
-        <a href="{%url "admin:index" %}">адмін</a>
-
-
-    </nav>
-      <a href="{%url 'users:avtorizeytion' %}" class="auth-link">ОБНОВЛЯЕТСЯ?</a>
-      <a href="{%url 'users:registration' %}" class="auth-link1" >Реєстрація</a>
-</header>
-<a href="{% url 'main:index' %}">
-<img class="picture-logo" src="{% static 'images/теремок.png' %}">
-</a>
-    {% block extra_ui %}
-<div class="main-layout">
-<div class="content-wrapper">
-    <aside class="left-sidebar">
-<div class="dropdown_meny_catalog">
-    <button class="btn flash-btn" id="catalogBtn">
-        Каталог товарів
-    </button>
-
-    <div class="dropdown_catalog_content" id="catalogMenu">
-        {% tagcategories as categories %}
-        {% for category in categories %}
-            <a href="{% url 'catalog:index' category.slug %}">
-                {{ category.name }}
+<header class="layout-header-block layout-header main-header">
+    <div class="header-left">
+        <nav class="main-nav" aria-label="Головна навігація">
+            <a href="#">Доставка та оплата</a>
+            <a href="#">Контакти</a>
+            <a href="#">Питання та відповіді</a>
+            <a href="#">Знаходження магазинів</a>
+        </nav>
+    </div>
+    <div class="header-center">
+        {% block header_search %}
+        <div class="layout-header-search search-wrapper">
+            <form role="search" action="{% url 'catalog:search' %}" method="get">
+                <div class="search-box">
+                    <input class="search-txt" type="search" name="q" id="searchinput" placeholder="Шукати">
+                    <button class="search-box_btn" type="submit" aria-label="Пошук">
+                        <img class="picture" src="{% static 'images/лупа.png' %}" alt="">
+                    </button>
+                    <button class="search-box_btn" id="voicebtn" type="button" aria-label="Голосовий пошук">
+                        <img class="picture" src="{% static 'images/800309.png' %}" alt="">
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% endblock %}
+    </div>
+    <div class="header-right">
+        <a href="{% url 'user:profile' %}" class="header-action-link">Профіль</a>
+        <a href="{% url 'admin:index' %}" class="header-action-link">Адміністратор</a>
+        <div class="header-auth">
+            <a href="{% url 'user:registration' %}" class="auth-link1">Реєстрація</a>
+            <a href="{% url 'user:avtorizeytion' %}" class="auth-link">Увійти</a>
+        </div>
+        <div class="layout-logo-wrap">
+            <a href="{% url 'main:index' %}">
+                <img class="layout-logo picture-logo" src="{% static 'images/теремок.png' %}" alt="Логотип магазину">
             </a>
-        {% endfor %}
-    </div>
-
-{% if slug_url %}
-<form action="{% url 'catalog:index' slug_url %}" method="get">
-{% else %}
-<form action="{% url 'catalog:index' 'vse-tovary' %}" method="get">
-{% endif %}
- <div class="price-range">
-    <div class="price-input">
-        <div class="field">
-            <span>Min</span>
-            <input type="number" class="input-min" value="0">
-        </div>
-        <div class="separator">-</div>
-        <div class="field">
-            <span>Max</span>
-            <input type="number" class="input-max" value="10000">
         </div>
     </div>
-    <div class="slider">
-        <div class="progress"></div>
-    </div>
-    <div class="range-input">
-        <input type="range" class="range-min" min="0" max="10000" value="{{ request.GET.range_min|default:0 }}" step="100" name="range_min" onchange="this.form.submit()">
-        <input type="range" class="range-max" min="0" max="10000"  value="{{ request.GET.range_max|default:10000 }}" step="100" name="range_max" onchange="this.form.submit()">
-    </div>
-</div>
-</form>
-    </div>
-<!--<div class="container_brend">
-    <div class="select-btn open">
-          <span class="btn-text">Бренди</span>
-          <span class="arrow-dwn">
-            <i class="fa-solid fa-chevron-down"></i>
-        </span>
-    </div>
-    <ul class="list-items">
-        <li class="item">
-            <span class="checkbox">
-              <i class="fa-solid fa-check check-icon"></i>
-            </span>
-            <span class="item-text"> FFFF</span>
-        </li>
-         <li class="item">
-            <span class="checkbox">
-              <i class="fa-solid fa-check check-icon"></i>
-            </span>
-            <span class="item-text"> DDDD</span>
-        </li>
+</header>
 
-         <li class="item">
-            <span class="checkbox">
-              <i class="fa-solid fa-check check-icon"></i>
-            </span>
-            <span class="item-text"> VVVV</span>
-        </li>
-        <li class="item">
-            <span class="checkbox">
-              <i class="fa-solid fa-check check-icon"></i>
-            </span>
-            <span class="item-text"> BBBB</span>
-        </li>
-
-    </ul>
-</div>--->
-    </aside>
+<div class="cart-btn-bar">
+    {% block cart_ui %}
     {% include "carts/includes/included_cart.html" %}
+    {% endblock %}
 </div>
-<div class="search-wrapper">
-<form class="d-flex" role="search" action="{%url "catalog:search" %}" method="get">
-<div class="search-box">
-    <input class="search-txt"  type="search" name="q" id="searchinput" placeholder="Шукати">
-    <button class="search-box_btn">
-        <img class="picture"
-             src="{% static 'images/лупа.png' %}">
-    </button>
-    <button class="search-box_btn" id="voicebtn" type="button" >
-    <img class="picture" src="{% static 'images/800309.png' %}">
-    </button>
+
+<div class="layout-page {% block layout_class %}{% endblock %}">
+    {% block extra_ui %}
+    <aside class="layout-sidebar left-sidebar" aria-label="Фільтри та каталог">
+        <div class="dropdown_meny_catalog">
+            <button class="btn flash-btn" id="catalogBtn" type="button">
+                Каталог товарів
+            </button>
+            <div class="dropdown_catalog_content" id="catalogMenu">
+                {% tagcategories as categories %}
+                {% for category in categories %}
+                    <a href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if slug_url %}
+        <form action="{% url 'catalog:index' slug_url %}" method="get">
+        {% else %}
+        <form action="{% url 'catalog:index' 'vse-tovary' %}" method="get">
+        {% endif %}
+            <div class="price-range">
+                <div class="price-input">
+                    <div class="field">
+                        <span>Мін</span>
+                        <input type="number" class="input-min" value="0">
+                    </div>
+                    <div class="separator">-</div>
+                    <div class="field">
+                        <span>Макс</span>
+                        <input type="number" class="input-max" value="10000">
+                    </div>
+                </div>
+                <div class="slider">
+                    <div class="progress"></div>
+                </div>
+                <div class="range-input">
+                    <input type="range" class="range-min" min="0" max="10000" value="{{ request.GET.range_min|default:0 }}" step="100" name="range_min" onchange="this.form.submit()">
+                    <input type="range" class="range-max" min="0" max="10000" value="{{ request.GET.range_max|default:10000 }}" step="100" name="range_max" onchange="this.form.submit()">
+                </div>
+            </div>
+        </form>
+    </aside>
+    {% endblock %}
+
+    <div class="layout-main">
+        {% block search_area %}{% endblock %}
+
+        <main class="layout-content">
+            {% block content %}{% endblock %}
+            {% block pagenacia %}{% endblock %}
+        </main>
+    </div>
 </div>
-</div>
-</form>
-</form>
-</div>
-{%endblock%}
-{%block content%}
-{%endblock%}
-{%block pagenacia%}
-{%endblock%}
-<div class="footer">
+
+<footer class="layout-footer footer">
     <div class="container_footer">
         <div class="footer-row">
-            <div class="footer-copyright footer-col">
-              <div class="footer-copyright-name">
-                  @ star_platunum
-              </div>
-                <p>
-                  Учбовий сайт для покращення знань в галузі фронтент розробки та бекенд розробки
-                </p>
+            <div class="footer-col footer-copyright">
+                <div class="footer-copyright-name">@ star_platunum</div>
+                <p>Учбовий сайт для покращення знань в галузі фронтент розробки та бекенд розробки</p>
             </div>
-            <div class="footer-icons footer-col">
-                <p>Мої контакти в соціальних мережах</p>
-               <div class="footer-icons-row">
-                   <a href="#">
-                       <img  src="{% static 'images/instagram.png' %}" alt="">
-                   </a>
-                   <a href="#">
-                       <img src="{% static 'images/in.png' %}" alt="">
-                   </a>
-                   <a href="#">
-                       <img src="{% static 'images/telegram.png' %}" alt="">
-                   </a>
-                   <a href="#">
-                       <img src="{% static 'images/github.png' %}" alt="">
-                   </a>
-               </div>
+            <div class="footer-col footer-icons">
+                <p class="footer-icons-title">Мої контакти в соціальних мережах</p>
+                <div class="footer-icons-row">
+                    <a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a>
+                    <a href="#"><img src="{% static 'images/in.png' %}" alt="LinkedIn"></a>
+                    <a href="#"><img src="{% static 'images/telegram.png' %}" alt="Telegram"></a>
+                    <a href="#"><img src="{% static 'images/github.png' %}" alt="GitHub"></a>
+                </div>
             </div>
-            <div class="footer-contacts footer-col">
-              <a href="#" class="footer-button">КОНТАКТИ</a>
+            <div class="footer-col footer-contacts">
+                <a href="#" class="footer-button">КОНТАКТИ</a>
                 <p>+380661686925</p>
-                 <p>+380634534534</p>
-                 <p>+110661686925</p>
+                <p>+380634534534</p>
+                <p>+110661686925</p>
             </div>
         </div>
     </div>
-</div>
+</footer>
+
 <script src="{% static 'js/catalog-dropdown.js' %}" defer></script>
 <script src="{% static 'js/Javamain.js' %}"></script>
 <script src="{% static 'js/Speech AP.js' %}"></script>

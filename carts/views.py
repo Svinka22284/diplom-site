@@ -70,7 +70,7 @@ def cart_change(request):
         request=request
     )
     response_data = {
-        "message": "Количество изменено",
+        "message": "Кількість змінено",
         "cart_items_html": cart_items_html,
         "total_price": total_price,
     }
@@ -101,7 +101,7 @@ def cart_remove(request):
     )
 
     return JsonResponse({
-        "message": "deleted",
+        "message": "Товар видалено",
         "cart_items_html": cart_items_html,
         "quantity_deleted": quantity,
         "total_price": total_price,

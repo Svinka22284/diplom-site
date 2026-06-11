@@ -9,15 +9,15 @@ class CreateOrderForm(forms.Form):
      number = forms.CharField()
      requires_delivery = forms.ChoiceField(
           choices=(
-               ("0", "Самовывоз"),
+               ("0", "Самовивіз"),
                ("1", "Доставка"),
           )
      )
      delivery_address = forms.CharField(required=False)
      payment_on_get = forms.ChoiceField(
           choices=(
-               ("0", "Картой"),
-               ("1", "Наличными"),
+               ("0", "Карткою"),
+               ("1", "Готівкою"),
           )
      )
 

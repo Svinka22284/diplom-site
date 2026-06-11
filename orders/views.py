@@ -32,7 +32,7 @@ def create_order(request):
                             quantity = cart_item.quantity
 
                             if product.quantity < quantity:
-                                raise ValidationError(f'Недостатня кількість товару {name} на складе\ в наявності - {product.quantity}')
+                                raise ValidationError(f'Недостатня кількість товару {name} в наявності — {product.quantity}')
 
                             OrderItem.objects.create(order=order,
                                                      product=product,
@@ -46,8 +46,8 @@ def create_order(request):
 
                         cart_items.delete()
 
-                        messages.success(request,'Заказ створенно')
-                        return redirect('users:profile')
+                        messages.success(request, 'Замовлення створено')
+                        return redirect('user:profile')
             except ValidationError as e:
                 messages.success(request,str(e))
                 return redirect('cart:order')

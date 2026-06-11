@@ -1,31 +1,27 @@
 {% extends 'base.html' %}
-{%block content%}
-<div class="table-product">
-    <div class="image-block">
-        <img class="image-product" src="{{ product.image.url }}">
-        <div class="id-product">{{product.display_id}}</div>
+
+{% block content %}
+<article class="product-detail table-product">
+    <div class="product-detail__image image-block">
+        <img class="image-product" src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="id-product">{{ product.display_id }}</div>
     </div>
-    <div class="body-product">
-        <h5 class="name-product">{{product.name}}</h5>
+    <div class="product-detail__body body-product">
+        <h1 class="name-product">{{ product.name }}</h1>
         <div class="price-product">
-            <p></p>
-            {%if product.discount%}
-            <strong>
-                {{product.sell_price}}
-            </strong>
-            {%else%}
-             <strong>
-                {{product.price}}
-            </strong>
-            {%endif%}
+            {% if product.discount %}
+            <strong>{{ product.sell_price }}</strong>
+            {% else %}
+            <strong>{{ product.price }}</strong>
+            {% endif %}
         </div>
-        <h6 class="text-product">{{product.description}}</h6>
-        <button  class="footer-button">
-           <a href="{%url "cart:cart_add" %}" class=" add-to-cart" data-product-id="{{product.id}}">
+        <p class="text-product">{{ product.description }}</p>
+        <button class="footer-button add-corzina-product" type="button">
+            <a href="{% url 'cart:cart_add' %}" class="add-to-cart" data-product-id="{{ product.id }}">
                 {% csrf_token %}
                 додати в кошик
             </a>
         </button>
     </div>
-</div>
-{%endblock%}
+</article>
+{% endblock %}

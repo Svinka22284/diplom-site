@@ -1,2 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load goods_tags %}
 
+{% block body_class %}page-home{% endblock %}
+{% block layout_class %}layout-page--full{% endblock %}
+{% block extra_ui %}{% endblock %}
+{% block search_area %}{% endblock %}
+{% block cart_ui %}{% endblock %}
+
+{% block content %}
+<section class="section-hero hero">
+    <h1>Купуй легко. Живи зручно.</h1>
+    <p>Швидкий пошук, вигідні ціни, просте оформлення</p>
+</section>
+
+<section class="section-categories main-categories">
+    {% for category in categories %}
+    <article class="container-categories-index">
+        <a href="{% url 'catalog:index' category.slug %}" class="category-card-silka">
+            <span class="category-title">{{ category.name }}</span>
+            {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            {% else %}
+                <img src="/static/img/no-image.png" alt="Немає зображення">
+            {% endif %}
+        </a>
+    </article>
+    {% empty %}
+    <p>Категорій немає</p>
+    {% endfor %}
+</section>
+{% endblock %}

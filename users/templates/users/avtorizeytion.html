@@ -1,31 +1,36 @@
 {% extends 'base.html' %}
-{% block extra_ui %}
-{% endblock %}
-{%block content%}
+
+{% block layout_class %}layout-page--full{% endblock %}
+{% block extra_ui %}{% endblock %}
+{% block search_area %}{% endblock %}
+{% block header_search %}{% endblock %}
+{% block cart_ui %}{% endblock %}
+
+{% block content %}
 <div class="page-login">
-<div class="wrapper_window">
-    <form action="{% url 'user:avtorizeytion' %}" method="post">
-    {%csrf_token%}
-        {%if request.GET.next%}
-            <input type="hidden" name="next" value="{{request.GET.next}}">
-        {% endif %}
-        <h1>Login</h1>
-        {%for item in form%}
-        <div class="input-box">
-            {{item}}
-        </div>
-        {%endfor%}
-        <div class="remember-forgot">
-            <label>
-                <input type="checkbox"> Remember me
-            </label>
-            <a href="#">Forgot password?</a>
-        </div>
-        <button type="submit" class="btn">Login</button>
-        <div class="register-link">
-            <p>Don't have account?<a href="{%url 'users:registration' %}">Register</a></p>
-        </div>
-    </form>
-</div>
+    <div class="wrapper_window">
+        <form action="{% url 'user:avtorizeytion' %}" method="post">
+            {% csrf_token %}
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+            <h1>Увійти</h1>
+            {% for item in form %}
+            <div class="input-box">
+                {{ item }}
+            </div>
+            {% endfor %}
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox"> Запам'ятати мене
+                </label>
+                <a href="#">Забули пароль?</a>
+            </div>
+            <button type="submit" class="btn">Увійти</button>
+            <div class="register-link">
+                <p>Немає акаунта? <a href="{% url 'user:registration' %}">Зареєструватися</a></p>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

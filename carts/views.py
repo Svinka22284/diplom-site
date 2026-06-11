@@ -5,9 +5,6 @@ from django.template.loader import render_to_string
 from carts.models import Cart
 from carts.utils import get_user_cart
 from goods.models import Products
-
-
-# Create your views here.
 def cart_add(request):
     product_id = request.POST.get('product_id')
     product = Products.objects.get(id=product_id)
@@ -73,7 +70,7 @@ def cart_change(request):
         request=request
     )
     response_data = {
-        "message": "Количество изменено",
+        "message": "Кількість змінено",
         "cart_items_html": cart_items_html,
         "total_price": total_price,
     }
@@ -104,7 +101,7 @@ def cart_remove(request):
     )
 
     return JsonResponse({
-        "message": "deleted",
+        "message": "Товар видалено",
         "cart_items_html": cart_items_html,
         "quantity_deleted": quantity,
         "total_price": total_price,

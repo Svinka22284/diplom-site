@@ -19,30 +19,7 @@
 
         <div class="cart-grid">
             <div class="cart-items" id="cart-items-container">
-                {% for cart in carts %}
-                <article class="cart-item">
-                    <div class="cart-item-img">
-                        <img src="https://via.placeholder.com/160" alt="{{ cart.product.name }}">
-                    </div>
-                    <div class="cart-item-main">
-                        <h3>{{ cart.product.name }}</h3>
-                        <p class="cart-desc">{{ cart.product.description }}</p>
-                        <div class="cart-actions">
-                            <div class="qty">
-                                <button class="decrement" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">-</button>
-                                <span class="number">{{ cart.quantity }}</span>
-                                <button class="increment" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">+</button>
-                            </div>
-                            <button class="cart-remove" type="button">
-                                <a href="#" class="remove-from-cart" data-cart-id="{{ cart.id }}">🗑</a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="cart-item-price">
-                        <strong>{{ cart.products_pice }}</strong>
-                    </div>
-                </article>
-                {% endfor %}
+                {% include "carts/includes/cart_items.html" with carts=carts %}
             </div>
 
             <aside class="cart-summary">
@@ -62,7 +39,7 @@
                 <button class="checkout" type="button">
                     <a href="{% url 'orders:create_order' %}">Перейти до оформлення</a>
                 </button>
-                <div class="secure">🔒 Безпечна оплата</div>
+                <div class="secure"></div>
             </aside>
         </div>
     </div>

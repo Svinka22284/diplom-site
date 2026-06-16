@@ -1,37 +1,29 @@
 {% for cart in carts %}
+<article class="cart-item">
+    <div class="cart-item-img">
+        {% if cart.product.image %}
+        <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}">
+        {% else %}
+        <img src="https://via.placeholder.com/120" alt="{{ cart.product.name }}">
+        {% endif %}
+    </div>
+    <div class="cart-item-main">
+        <h3>{{ cart.product.name }}</h3>
+        <p class="cart-desc"></p>
+        <div class="cart-actions">
 
-        <div class="cart-item">
-
-            <img src="https://via.placeholder.com/80" alt="">
-
-            <div class="cart-info">
-
-                <h4>{{ cart.product.name }}</h4>
-
-                <p>{{ cart.products_pice }}</p>
-
-                <div class="qty-box">
-                    <button  class="decrement" data-cart-id="{{cart.id}}" data-cart-change-url="{%url "cart:cart_change" %}">
-
-                    -</button>
-
-                    <span class="number">
-                        {{ cart.quantity }}
-                    </span>
-
-                    <button  class="increment" data-cart-id="{{cart.id}}" data-cart-change-url="{%url "cart:cart_change" %}">
-
-                    +</button>
-                </div>
-
-            </div>
-
-            <a href="#"
-   class="remove-from-cart"
-   data-cart-id="{{ cart.id }}">
-    🗑
-</a>
-
+            <button class="cart-remove" type="button">
+                <a href="#" class="remove-from-cart" data-cart-id="{{ cart.id }}">🗑</a>
+            </button>
         </div>
-
-        {% endfor %}
+        <div class="cart-qty">
+                <button class="decrement" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">-</button>
+                <span class="number">{{ cart.quantity }}</span>
+                <button class="increment" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">+</button>
+            </div>
+    </div>
+    <div class="cart-item-price">
+        <strong>{{ cart.products_pice }}</strong>
+    </div>
+</article>
+{% endfor %}

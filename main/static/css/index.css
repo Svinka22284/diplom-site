@@ -1,6 +1,4 @@
-/* ==========================================================================
-   1. BASE & VARIABLES
-   ========================================================================== */
+
 
 :root {
     --color-header-start: #0f7ba6;
@@ -57,9 +55,7 @@ img {
     height: auto;
 }
 
-/* ==========================================================================
-   2. LAYOUT
-   ========================================================================== */
+
 
 .layout-header-block {
     flex-shrink: 0;
@@ -267,9 +263,7 @@ img {
     /* legacy – replaced by layout-* */
 }
 
-/* ==========================================================================
-   3. HEADER NAV & AUTH
-   ========================================================================== */
+
 
 .main-nav {
     display: flex;
@@ -309,9 +303,7 @@ img {
     white-space: nowrap;
 }
 
-/* ==========================================================================
-   4. SIDEBAR: CATALOG & PRICE FILTER
-   ========================================================================== */
+
 
 .dropdown_meny_catalog {
     position: relative;
@@ -615,9 +607,7 @@ input[type="range"]::-moz-range-thumb {
     color: #2D3436;
 }
 
-/* ==========================================================================
-   5. SEARCH
-   ========================================================================== */
+
 
 .search-box {
     border: 5px solid mediumseagreen;
@@ -662,9 +652,7 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-/* ==========================================================================
-   6. HOME PAGE
-   ========================================================================== */
+
 
 .page-home .section-hero,
 .hero {
@@ -755,9 +743,7 @@ input[type="range"]::-moz-range-thumb {
     max-width: 100%;
 }
 
-/* ==========================================================================
-   7. CATALOG & PRODUCT CARDS
-   ========================================================================== */
+
 
 .section-catalog,
 .cards {
@@ -942,9 +928,7 @@ input[type="range"]::-moz-range-thumb {
     color: gray;
 }
 
-/* ==========================================================================
-   8. PRODUCT DETAIL PAGE
-   ========================================================================== */
+
 
 .product-detail,
 .table-product {
@@ -1023,9 +1007,6 @@ input[type="range"]::-moz-range-thumb {
     background: #000;
 }
 
-/* ==========================================================================
-   9. AUTH PAGES (LOGIN & REGISTER)
-   ========================================================================== */
 
 .page-login,
 .page-register {
@@ -1187,9 +1168,7 @@ input[type="range"]::-moz-range-thumb {
     display: block;
 }
 
-/* ==========================================================================
-   10. PROFILE PAGE
-   ========================================================================== */
+
 
 .container-profile {
     position: relative;
@@ -1353,9 +1332,7 @@ input[type="range"]::-moz-range-thumb {
     border-top: 1px solid #ddd;
 }
 
-/* ==========================================================================
-   11. CART SIDEBAR (floating drawer)
-   ========================================================================== */
+
 
 .cart-btn {
     padding: 12px 20px;
@@ -1456,12 +1433,67 @@ input[type="range"]::-moz-range-thumb {
     align-items: flex-start;
 }
 
-.cart-sidebar .cart-item img {
+.cart-sidebar .cart-item img,
+.cart-sidebar .cart-item-img img {
     width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 10px;
     flex-shrink: 0;
+}
+
+.cart-sidebar .cart-item-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-sidebar .cart-item-main h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: inherit;
+}
+
+.cart-sidebar .cart-desc {
+    display: none;
+}
+
+.cart-sidebar .cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.cart-sidebar .cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-sidebar .cart-qty button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: #111827;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-sidebar .cart-item-price {
+    font-size: 15px;
+    font-weight: 600;
+    flex-shrink: 0;
+    align-self: flex-start;
+    color: inherit;
+}
+
+.cart-sidebar .cart-remove {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
 }
 
 .cart-sidebar .cart-info {
@@ -1529,9 +1561,6 @@ input[type="range"]::-moz-range-thumb {
     display: block;
 }
 
-/* ==========================================================================
-   12. CART PAGE (full page & embedded in profile/checkout)
-   ========================================================================== */
 
 .cart-page {
     width: 100%;
@@ -1630,7 +1659,7 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     align-items: center;
     gap: 14px;
-    background: #2a2c35;
+
     padding: 7px 14px;
     border-radius: 12px;
 }
@@ -1726,9 +1755,7 @@ input[type="range"]::-moz-range-thumb {
     margin-top: 14px;
 }
 
-/* ==========================================================================
-   13. CHECKOUT PAGE
-   ========================================================================== */
+
 
 .page-checkout,
 .boss-conteiner {
@@ -1840,9 +1867,7 @@ input[type="range"]::-moz-range-thumb {
     background: #303844;
 }
 
-/* ==========================================================================
-   14. FOOTER & PAGINATION
-   ========================================================================== */
+
 
 .footer {
     margin-top: auto;
@@ -1991,9 +2016,7 @@ input[type="range"]::-moz-range-thumb {
     text-shadow: 0 0 20px rgb(255, 224, 27), 0 0 20px rgb(255, 224, 27);
 }
 
-/* ==========================================================================
-   15. RESPONSIVE
-   ========================================================================== */
+
 
 @media (max-width: 1440px) {
     .layout-page {

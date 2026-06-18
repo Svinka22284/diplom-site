@@ -20,11 +20,13 @@
 
 <header class="layout-header-block layout-header main-header">
     <div class="header-left">
+        <div class="layout-logo-wrap">
+            <a href="{% url 'main:index' %}">
+                <img class="layout-logo picture-logo" src="{% static 'images/теремок.png' %}" alt="Логотип магазину">
+            </a>
+        </div>
         <nav class="main-nav" aria-label="Головна навігація">
-            <a href="#">Доставка та оплата</a>
-            <a href="#">Контакти</a>
-            <a href="#">Питання та відповіді</a>
-            <a href="#">Знаходження магазинів</a>
+
         </nav>
     </div>
     <div class="header-center">
@@ -45,16 +47,15 @@
         {% endblock %}
     </div>
     <div class="header-right">
+        {% if user.is_authenticated %}
         <a href="{% url 'user:profile' %}" class="header-action-link">Профіль</a>
+        {% endif %}
+        {% if user.is_staff %}
         <a href="{% url 'admin:index' %}" class="header-action-link">Адміністратор</a>
+        {% endif %}
         <div class="header-auth">
             <a href="{% url 'user:registration' %}" class="auth-link1">Реєстрація</a>
             <a href="{% url 'user:avtorizeytion' %}" class="auth-link">Увійти</a>
-        </div>
-        <div class="layout-logo-wrap">
-            <a href="{% url 'main:index' %}">
-                <img class="layout-logo picture-logo" src="{% static 'images/теремок.png' %}" alt="Логотип магазину">
-            </a>
         </div>
     </div>
 </header>
@@ -123,20 +124,20 @@
     <div class="container_footer">
         <div class="footer-row">
             <div class="footer-col footer-copyright">
-                <div class="footer-copyright-name">@ star_platunum</div>
-                <p>Учбовий сайт для покращення знань в галузі фронтент розробки та бекенд розробки</p>
+                <div class="footer-copyright-name">@ TEREMOK_SHOP</div>
+                <p>Теремок — товари для дому, які створюють затишок у вашій оселі.</p>
             </div>
             <div class="footer-col footer-icons">
                 <p class="footer-icons-title">Мої контакти в соціальних мережах</p>
                 <div class="footer-icons-row">
-                    <a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a>
+                    <a href="https://www.instagram.com/adrianov.piotr/?hl=ru"><img src="{% static 'images/instagram.png' %}" alt="Instagram"></a>
                     <a href="#"><img src="{% static 'images/in.png' %}" alt="LinkedIn"></a>
-                    <a href="#"><img src="{% static 'images/telegram.png' %}" alt="Telegram"></a>
-                    <a href="#"><img src="{% static 'images/github.png' %}" alt="GitHub"></a>
+                    <a href="https://web.telegram.org/k/"><img src="{% static 'images/telegram.png' %}" alt="Telegram"></a>
+                    <a href="https://github.com/Svinka22284"><img src="{% static 'images/github.png' %}" alt="GitHub"></a>
                 </div>
             </div>
             <div class="footer-col footer-contacts">
-                <a href="#" class="footer-button">КОНТАКТИ</a>
+                <a href="#" class="footer-icons-title">КОНТАКТИ</a>
                 <p>+380661686925</p>
                 <p>+380634534534</p>
                 <p>+110661686925</p>

@@ -14,12 +14,17 @@
         {% for product in goods %}
         <article class="card">
             <div class="card__top">
+                {% if product.category %}
+                <span class="card__category">{{ product.category.name }}</span>
+                {% endif %}
                 <a href="{% url 'catalog:product' product.slug %}" class="card__img">
                     {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                     {% endif %}
                 </a>
-                <div class="card_label">{{ product.discount }}</div>
+                {% if product.discount %}
+                <span class="card_label">-{{ product.discount }}%</span>
+                {% endif %}
             </div>
             <div class="card__bottom">
                 <div class="card__prices">

@@ -20,13 +20,7 @@
 
 <header class="layout-header-block layout-header main-header">
     <div class="header-left">
-        <div class="layout-logo-wrap">
-            <a href="{% url 'main:index' %}">
-                <img class="layout-logo picture-logo" src="{% static 'images/теремок.png' %}" alt="Логотип магазину">
-            </a>
-        </div>
         <nav class="main-nav" aria-label="Головна навігація">
-
         </nav>
     </div>
     <div class="header-center">
@@ -54,11 +48,24 @@
         <a href="{% url 'admin:index' %}" class="header-action-link">Адміністратор</a>
         {% endif %}
         <div class="header-auth">
+            {% if not user.is_authenticated %}
             <a href="{% url 'user:registration' %}" class="auth-link1">Реєстрація</a>
+            {% endif %}
+            {% if not user.is_authenticated %}
             <a href="{% url 'user:avtorizeytion' %}" class="auth-link">Увійти</a>
+             {% endif %}
+            {% if user.is_authenticated %}
+            <a href="{% url 'user:avtorizeytion' %}" class="auth-link">Вийти</a>
+            {% endif %}
         </div>
     </div>
 </header>
+
+<div class="site-logo-bar">
+    <a href="{% url 'main:index' %}" class="site-logo" aria-label="Логотип магазину">
+        <img src="{% static 'images/теремок.png' %}" alt="Логотип магазину">
+    </a>
+</div>
 
 <div class="cart-btn-bar">
     {% block cart_ui %}
@@ -152,5 +159,6 @@
 <script src="{% static 'js/jquery/jquery-3.7.0.min.js' %}"></script>
 <script src="{% static 'js/jquery/jquery-ajax.js' %}"></script>
 <script src="{% static 'js/list.js' %}"></script>
+{% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <article class="product-detail table-product">
     <div class="product-detail__image image-block">
-        <img class="image-product" src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% if product.image %}
+    <img class="image-product" src="{{ product.image.url }}" alt="{{ product.name }}">
+{% else %}
+    <img class="image-product" src="{% static 'images/теремок.png' %}" alt="{{ product.name }}">
+{% endif %}
         <div class="id-product">{{ product.display_id }}</div>
     </div>
     <div class="product-detail__body body-product">

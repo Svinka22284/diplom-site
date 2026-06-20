@@ -22,6 +22,8 @@
     --card-glass-bg: rgba(210, 235, 255, 0.62);
     --card-glass-border: rgba(255, 255, 255, 0.55);
     --search-max-width: 560px;
+    --site-logo-width: clamp(150px, 18vw, 200px);
+    --site-logo-top: 76px;
 }
 
 *,
@@ -44,6 +46,7 @@ body {
     flex-direction: column;
     overflow-x: hidden;
     max-width: 100%;
+    position: relative;
 }
 
 a {
@@ -105,20 +108,69 @@ img {
     justify-self: end;
 }
 
-.layout-logo-wrap {
-    flex-shrink: 0;
+.header-left:not(:has(a)) {
+    display: none;
 }
 
-.layout-logo-wrap a {
-    display: inline-block;
+.site-logo-bar {
+    display: contents;
+}
+
+.site-logo {
+    width: var(--site-logo-width);
+    max-width: calc(100vw - var(--layout-padding) * 2);
     line-height: 0;
+    display: block;
 }
 
-.layout-logo {
-    width: clamp(72px, 9vw, 120px);
+.site-logo img {
+    width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .site-logo {
+        position: absolute;
+        top: var(--site-logo-top);
+        left: var(--layout-padding);
+        z-index: 5;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    :root {
+        --site-logo-width: clamp(130px, 16vw, 175px);
+        --site-logo-top: 118px;
+    }
+}
+
+@media (max-width: 767px) {
+    :root {
+        --site-logo-width: clamp(120px, 45.6vw, 168px);
+    }
+
+    .site-logo-bar {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        flex-shrink: 0;
+        padding: 8px var(--layout-padding) 4px;
+        box-sizing: border-box;
+    }
+
+    .site-logo {
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+        z-index: auto;
+        width: var(--site-logo-width);
+        max-width: calc(100% - var(--layout-padding) * 2);
+        margin: 0 auto;
+    }
 }
 
 .layout-header-search {
@@ -251,13 +303,6 @@ img {
 /* Legacy aliases */
 .main-header {
     margin-bottom: 0;
-}
-
-.picture-logo {
-    width: clamp(72px, 9vw, 120px);
-    height: auto;
-    display: block;
-    object-fit: contain;
 }
 
 .content-wrapper,
@@ -1892,6 +1937,53 @@ input[type="range"]::-moz-range-thumb {
     background: #303844;
 }
 
+.payment-block {
+    margin-bottom: 25px;
+}
+
+.card-payment-form {
+    display: none;
+    margin-bottom: 0;
+}
+
+.card-payment-form.is-visible {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 25px;
+}
+
+.card-payment-form .form-row {
+    margin-bottom: 16px;
+}
+
+.card-payment-form .input-up input {
+    width: 100%;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.2s;
+    box-sizing: border-box;
+    background: white;
+}
+
+.card-payment-form .input-up input:focus {
+    border-color: #4b84ff;
+}
+
+.card-payment-form .input-up input.is-invalid {
+    border-color: #d93025;
+}
+
+.field-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #d93025;
+    min-height: 18px;
+}
+
 
 
 .footer {
@@ -2152,11 +2244,6 @@ input[type="range"]::-moz-range-thumb {
 }
 
 @media (max-width: 768px) {
-    .layout-logo,
-    .picture-logo {
-        width: clamp(64px, 18vw, 100px);
-    }
-
     .main-nav a,
     .header-action-link,
     .auth-link,
@@ -2276,11 +2363,7 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 480px) {
     :root {
         --layout-padding: 16px;
-    }
-
-    .layout-logo,
-    .picture-logo {
-        width: clamp(56px, 22vw, 90px);
+        --site-logo-width: clamp(115px, 43.2vw, 156px);
     }
 
     .main-nav a {
@@ -2338,11 +2421,7 @@ input[type="range"]::-moz-range-thumb {
 @media (max-width: 320px) {
     :root {
         --layout-padding: 12px;
-    }
-
-    .layout-logo,
-    .picture-logo {
-        width: clamp(48px, 28vw, 80px);
+        --site-logo-width: clamp(101px, 40.8vw, 134px);
     }
 
     .main-nav {

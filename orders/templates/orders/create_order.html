@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load carts_tags %}
+{% load static %}
 
 {% block layout_class %}layout-page--full{% endblock %}
 {% block extra_ui %}{% endblock %}
@@ -14,7 +15,7 @@
         {% include "users/includes/cart_sidebar.html" %}
     </div>
 
-    <form action="{% url 'orders:create_order' %}" method="post">
+    <form action="{% url 'orders:create_order' %}" method="post" id="checkoutForm" novalidate>
         {% csrf_token %}
         {{ form.errors }}
         <div class="cantainer-details">
@@ -59,7 +60,7 @@
                 </label>
             </div>
 
-            <div class="form-row">
+            <div class="form-row" id="deliveryAddressField">
                 <div class="input-up">
                     <label>Адреса доставки*:</label>
                     <textarea name="delivery_address">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
@@ -69,20 +70,53 @@
                 </div>
             </div>
 
-            <div class="radio-group">
+            <div class="radio-group payment-block">
                 <span class="radio-title">Спосіб оплати:</span>
                 <label>
                     <input type="radio" name="payment_on_get" value="1" checked>
-                    Оплата карткою
+                    Готівка при отриманні
                 </label>
                 <label>
                     <input type="radio" name="payment_on_get" value="0">
-                    Готівкою/карткою при отриманні
+                    Оплата карткою
                 </label>
+            </div>
+
+            <div id="cardPaymentForm" class="card-payment-form payment-block" aria-hidden="true">
+                    <div class="form-row">
+                        <div class="input-up">
+                            <label for="cardNumber">Номер картки</label>
+                            <input type="text" id="cardNumber" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX">
+                            <span class="field-error" id="cardNumberError"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-up">
+                            <label for="cardHolder">Ім'я власника</label>
+                            <input type="text" id="cardHolder" autocomplete="cc-name" placeholder="IVAN IVANOV">
+                            <span class="field-error" id="cardHolderError"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-up">
+                            <label for="cardExpiry">Термін дії (MM/YY)</label>
+                            <input type="text" id="cardExpiry" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY">
+                            <span class="field-error" id="cardExpiryError"></span>
+                        </div>
+                        <div class="input-up">
+                            <label for="cardCvv">CVV</label>
+                            <input type="text" id="cardCvv" inputmode="numeric" autocomplete="cc-csc" maxlength="4" placeholder="123">
+                            <span class="field-error" id="cardCvvError"></span>
+                        </div>
+                    </div>
             </div>
 
             <button class="order-btn" type="submit">Оформити замовлення</button>
         </div>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/checkout-payment.js' %}" defer></script>
 {% endblock %}

@@ -13,24 +13,11 @@ class Command(BaseCommand):
     help = "Створює товари з локальними фото для магазину Теремок"
 
     def handle(self, *args, **kwargs):
-        images_dir = settings.BASE_DIR / "media" / "demo_products"
-
-        if not images_dir.exists():
-            self.stdout.write(self.style.ERROR("Створи папку media/demo_products і додай туди фото"))
-            return
-
-        images = [
-            file for file in os.listdir(images_dir)
-            if file.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".jfif"))
-        ]
-
-        if not images:
-            self.stdout.write(self.style.ERROR("У папці media/demo_products немає фото"))
-            return
+        base_images_dir = settings.BASE_DIR / "media" / "demo_products"
 
         products = {
             "Спальня": ["Подушка ортопедична", "Ліжко двоспальне", "Ковдра зимова", "Матрац ортопедичний", "Постільна білизна"],
-            "Ванна": ["Рушник банний", "Дзеркало для ванної", "Килимок для ванної", "Дозатор для мила", "Шафка для ванної"],
+            "Ванна кімната": ["Рушник банний", "Дзеркало для ванної", "Килимок для ванної", "Дозатор для мила", "Шафка для ванної"],
             "Кухня": ["Набір тарілок", "Сковорода антипригарна", "Чайник електричний", "Набір каструль", "Контейнер для продуктів"],
             "Автотовари": ["Автомобільний органайзер", "Автомобільний пилосос", "Ароматизатор для авто", "Автомобільний компресор", "Чохол на кермо"],
             "Офіс": ["Офісний стілець", "Письмовий стіл", "Настільна лампа", "Органайзер для документів", "Полиця для книг"],
@@ -49,14 +36,28 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING(f"Категорію '{category_name}' не знайдено. Пропускаю."))
                 continue
 
+            category_images_dir = base_images_dir / category_name
+
+            if not category_images_dir.exists():
+                self.stdout.write(self.style.WARNING(f"Папку '{category_name}' не знайдено. Пропускаю категорію."))
+                continue
+
+            images = [
+                file for file in os.listdir(category_images_dir)
+                if file.lower().endswith((".jpg", ".jpeg", ".png", ".webp", ".jfif"))
+            ]
+
+            if not images:
+                self.stdout.write(self.style.WARNING(f"У папці '{category_name}' немає фото. Пропускаю категорію."))
+                continue
+
             for i in range(1, 101):
                 product_name = product_list[(i - 1) % len(product_list)]
-
-                image_name = images[(created_count) % len(images)]
-                image_path = images_dir / image_name
+                image_name = images[(i - 1) % len(images)]
+                image_path = category_images_dir / image_name
 
                 product = Products(
-                    name=product_name,
+                    name=f"{product_name} модель {i}",
                     slug=f"{slugify(product_name)}-{category.id}-{i}",
                     description=f"{product_name} — якісний товар для дому.",
                     price=randint(100, 15000),
@@ -75,6 +76,4 @@ class Command(BaseCommand):
                 product.save()
                 created_count += 1
 
-                self.stdout.write(f"Створено товар {created_count}: {product_name}")
-
-        self.stdout.write(self.style.SUCCESS(f"Успішно створено {created_count} товарів з локальними фото"))
+        self.stdout.write(self.style.SUCCESS(f"Створено {created_count} товарів"))

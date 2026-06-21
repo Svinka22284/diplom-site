@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block extra_ui %}
+<aside class="layout-sidebar left-sidebar profile-catalog-sidebar" aria-label="Каталог товарів">
+    {% include "includes/catalog_dropdown.html" %}
+</aside>
+{% endblock %}
+
 {% block content %}
 <article class="product-detail table-product">
     <div class="product-detail__image image-block">

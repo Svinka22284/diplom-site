@@ -19,3 +19,9 @@ def catalog(request):
 def product(request):
     return render(request,'main/product.html')
 
+def about(request):
+    return render(request, 'main/about.html', {'title': 'Про магазин'})
+
+
+def location(request):
+    return render(request, 'main/location.html', {'title': 'Розташування'})

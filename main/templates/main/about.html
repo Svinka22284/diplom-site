@@ -1,13 +1,68 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h5>ABOUT MENU</h5>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block extra_ui %}{% endblock %}
+{% block content %}
+
+<section class="tm-about-page">
+    <div class="tm-about-wrapper">
+
+        <div class="tm-about-hero">
+            <div class="tm-about-text">
+                <span class="tm-badge">ТЕРЕМОК</span>
+                <h1>Товари для дому, які роблять оселю затишною</h1>
+                <p>
+                    «Теремок» — це інтернет-магазин для тих, хто хоче швидко знайти
+                    потрібні речі для дому: від кухонного приладдя до товарів для спальні,
+                    ванної кімнати, саду та щоденного побуту.
+                </p>
+                <a href="/catalog/vse-tovary/" class="tm-main-btn">Перейти до каталогу</a>
+            </div>
+
+            <div class="tm-about-box">
+                <h3>Що є в магазині?</h3>
+                <ul>
+                    <li>товари для кухні та спальні;</li>
+                    <li>побутова хімія та засоби догляду;</li>
+                    <li>товари для саду, офісу та дітей;</li>
+                    <li>зручне оформлення замовлення онлайн.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tm-about-cards">
+            <div class="tm-about-card">
+                <div class="tm-icon">🏠</div>
+                <h2>Про магазин</h2>
+                <p>
+                    Магазин створено для зручного онлайн-продажу товарів для дому.
+                    Користувач може переглядати каталог, шукати потрібні товари,
+                    додавати їх до кошика та оформлювати замовлення без зайвих дій.
+                </p>
+            </div>
+
+            <div class="tm-about-card">
+                <div class="tm-icon">🛒</div>
+                <h2>Наші послуги</h2>
+                <p>
+                    Ми пропонуємо зручний каталог товарів, поділ продукції за категоріями,
+                    швидкий пошук, кошик покупця та оформлення замовлення через сайт.
+                    Це спрощує взаємодію між магазином і клієнтом.
+                </p>
+            </div>
+
+            <div class="tm-about-card">
+                <div class="tm-icon">📦</div>
+                <h2>Що продаємо?</h2>
+                <p>
+                    У магазині представлені товари для спальні, кухні, ванної кімнати,
+                    офісу, саду, побутова хімія, засоби гігієни, автотовари та дитячі іграшки.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+{% endblock %}

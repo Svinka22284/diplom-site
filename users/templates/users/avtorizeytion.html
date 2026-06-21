@@ -9,17 +9,26 @@
 {% block content %}
 <div class="page-login">
     <div class="wrapper_window">
-        <form action="{% url 'user:avtorizeytion' %}" method="post">
+        <form action="{% url 'user:avtorizeytion' %}" method="post" novalidate>
             {% csrf_token %}
             {% if request.GET.next %}
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             {% endif %}
             <h1>Увійти</h1>
-            {% for item in form %}
+            {% include "includes/form_non_field_errors.html" %}
+
             <div class="input-box">
-                {{ item }}
+                <label for="id_username">Логін</label>
+                <input type="text" id="id_username" name="username"{% if form.username.errors %} class="is-invalid"{% endif %} placeholder="Введіть логін" autofocus value="{{ form.username.value|default:'' }}">
+                {% include "includes/form_field_errors.html" with errors=form.username.errors %}
             </div>
-            {% endfor %}
+
+            <div class="input-box">
+                <label for="id_password">Пароль</label>
+                <input type="password" id="id_password" name="password"{% if form.password.errors %} class="is-invalid"{% endif %} placeholder="Введіть пароль" autocomplete="current-password">
+                {% include "includes/form_field_errors.html" with errors=form.password.errors %}
+            </div>
+
             <div class="remember-forgot">
                 <label>
                     <input type="checkbox"> Запам'ятати мене

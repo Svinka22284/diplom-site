@@ -17,34 +17,28 @@
 
     <form action="{% url 'orders:create_order' %}" method="post" id="checkoutForm" novalidate>
         {% csrf_token %}
-        {{ form.errors }}
         <div class="cantainer-details">
             <h4>Деталі замовлення</h4>
+            {% include "includes/form_non_field_errors.html" %}
 
             <div class="form-row">
                 <div class="input-up">
                     <label>Ім'я*:</label>
-                    <input type="text" name="first_name" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}">
-                    {% if form.first_name.errors %}
-                    <div class="alert alert-danger">{{ form.first_name.errors }}</div>
-                    {% endif %}
+                    <input type="text" name="first_name" class="{% if form.first_name.errors %}is-invalid{% endif %}" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}">
+                    {% include "includes/form_field_errors.html" with errors=form.first_name.errors %}
                 </div>
                 <div class="input-up">
                     <label>Прізвище*:</label>
-                    <input type="text" name="last_name" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}">
-                    {% if form.last_name.errors %}
-                    <div class="alert alert-danger">{{ form.last_name.errors }}</div>
-                    {% endif %}
+                    <input type="text" name="last_name" class="{% if form.last_name.errors %}is-invalid{% endif %}" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}">
+                    {% include "includes/form_field_errors.html" with errors=form.last_name.errors %}
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="input-up">
                     <label>Номер телефону*:</label>
-                    <input type="text" name="number" placeholder="У форматі: XXX-XXX-XX-XX" value="{% if form.number.value %}{{ form.number.value }}{% endif %}">
-                    {% if form.number.errors %}
-                    <div class="alert alert-danger">{{ form.number.errors }}</div>
-                    {% endif %}
+                    <input type="text" name="number" class="{% if form.number.errors %}is-invalid{% endif %}" placeholder="У форматі: XXX-XXX-XX-XX" value="{% if form.number.value %}{{ form.number.value }}{% endif %}">
+                    {% include "includes/form_field_errors.html" with errors=form.number.errors %}
                 </div>
             </div>
 
@@ -63,10 +57,8 @@
             <div class="form-row" id="deliveryAddressField">
                 <div class="input-up">
                     <label>Адреса доставки*:</label>
-                    <textarea name="delivery_address">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
-                    {% if form.delivery_address.errors %}
-                    <div class="alert alert-danger">{{ form.delivery_address.errors }}</div>
-                    {% endif %}
+                    <textarea name="delivery_address" class="{% if form.delivery_address.errors %}is-invalid{% endif %}">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
+                    {% include "includes/form_field_errors.html" with errors=form.delivery_address.errors %}
                 </div>
             </div>
 
@@ -87,26 +79,26 @@
                         <div class="input-up">
                             <label for="cardNumber">Номер картки</label>
                             <input type="text" id="cardNumber" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX">
-                            <span class="field-error" id="cardNumberError"></span>
+                            <span class="field-error form-error-msg form-error-msg--inline" id="cardNumberError" role="alert"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="input-up">
                             <label for="cardHolder">Ім'я власника</label>
                             <input type="text" id="cardHolder" autocomplete="cc-name" placeholder="IVAN IVANOV">
-                            <span class="field-error" id="cardHolderError"></span>
+                            <span class="field-error form-error-msg form-error-msg--inline" id="cardHolderError" role="alert"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="input-up">
                             <label for="cardExpiry">Термін дії (MM/YY)</label>
                             <input type="text" id="cardExpiry" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/YY">
-                            <span class="field-error" id="cardExpiryError"></span>
+                            <span class="field-error form-error-msg form-error-msg--inline" id="cardExpiryError" role="alert"></span>
                         </div>
                         <div class="input-up">
                             <label for="cardCvv">CVV</label>
                             <input type="text" id="cardCvv" inputmode="numeric" autocomplete="cc-csc" maxlength="4" placeholder="123">
-                            <span class="field-error" id="cardCvvError"></span>
+                            <span class="field-error form-error-msg form-error-msg--inline" id="cardCvvError" role="alert"></span>
                         </div>
                     </div>
             </div>

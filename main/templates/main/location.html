@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="tm-location-page">
+    <div class="tm-location-wrapper">
+
+        <div class="tm-location-header">
+            <span class="tm-badge">ДЕ НАС ЗНАЙТИ</span>
+            <h1>Розташування магазину «Теремок»</h1>
+            <p>
+                Нижче вказано місце розташування магазину, контактні дані та карта
+                для швидкого пошуку.
+            </p>
+        </div>
+
+        <div class="tm-location-content">
+            <div class="tm-location-info">
+                <h2>Контактна інформація</h2>
+
+                <div class="tm-info-row">
+                    <span>📍</span>
+                    <div>
+                        <strong>Адреса</strong>
+                        <p>м. Боярка, Київська область</p>
+                    </div>
+                </div>
+
+                <div class="tm-info-row">
+                    <span>☎️</span>
+                    <div>
+                        <strong>Телефон</strong>
+                        <p>+38 (067) 123-45-67</p>
+                    </div>
+                </div>
+
+                <div class="tm-info-row">
+                    <span>✉️</span>
+                    <div>
+                        <strong>Email</strong>
+                        <p>teremok.shop@example.com</p>
+                    </div>
+                </div>
+
+                <div class="tm-info-row">
+                    <span>🕘</span>
+                    <div>
+                        <strong>Графік роботи</strong>
+                        <p>Пн–Нд: 09:00–20:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tm-map-card">
+                <iframe
+                    src="https://www.google.com/maps?q=Боярка%20Київська%20область&output=embed"
+                    width="100%"
+                    height="430"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+{% endblock %}

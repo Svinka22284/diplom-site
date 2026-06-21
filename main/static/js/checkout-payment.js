@@ -48,9 +48,24 @@
     function clearCardErrors() {
         Object.keys(errors).forEach(function (key) {
             if (errors[key]) {
-                errors[key].textContent = "";
+                errors[key].innerHTML = "";
+                errors[key].classList.remove("form-error-msg--visible");
             }
         });
+    }
+
+    function clearFieldSuccess(fieldKey, input) {
+        if (input) {
+            input.classList.remove("is-invalid");
+        }
+        if (errors[fieldKey]) {
+            errors[fieldKey].innerHTML = "";
+            errors[fieldKey].classList.remove("form-error-msg--visible");
+        }
+    }
+
+    function hasFieldError(fieldKey) {
+        return errors[fieldKey] && errors[fieldKey].classList.contains("form-error-msg--visible");
     }
 
     function setError(fieldKey, message) {
@@ -62,10 +77,22 @@
         };
 
         if (errors[fieldKey]) {
-            errors[fieldKey].textContent = message;
+            if (message) {
+                errors[fieldKey].innerHTML =
+                    '<span class="form-error-msg__icon" aria-hidden="true">⚠</span>' +
+                    '<span class="form-error-msg__text">' + message + "</span>";
+                errors[fieldKey].classList.add("form-error-msg--visible");
+            } else {
+                errors[fieldKey].innerHTML = "";
+                errors[fieldKey].classList.remove("form-error-msg--visible");
+            }
         }
         if (inputMap[fieldKey]) {
-            inputMap[fieldKey].classList.add("is-invalid");
+            if (message) {
+                inputMap[fieldKey].classList.add("is-invalid");
+            } else {
+                inputMap[fieldKey].classList.remove("is-invalid");
+            }
         }
     }
 
@@ -96,8 +123,7 @@
             setError("cardNumber", "Номер картки повинен містити 16 цифр");
             return false;
         }
-        cardNumber.classList.remove("is-invalid");
-        errors.cardNumber.textContent = "";
+        clearFieldSuccess("cardNumber", cardNumber);
         return true;
     }
 
@@ -111,8 +137,7 @@
             setError("cardHolder", "Допускаються лише літери та пробіли");
             return false;
         }
-        cardHolder.classList.remove("is-invalid");
-        errors.cardHolder.textContent = "";
+        clearFieldSuccess("cardHolder", cardHolder);
         return true;
     }
 
@@ -129,8 +154,7 @@
             return false;
         }
 
-        cardExpiry.classList.remove("is-invalid");
-        errors.cardExpiry.textContent = "";
+        clearFieldSuccess("cardExpiry", cardExpiry);
         return true;
     }
 
@@ -144,8 +168,7 @@
             setError("cardCvv", "CVV повинен містити 3 або 4 цифри");
             return false;
         }
-        cardCvv.classList.remove("is-invalid");
-        errors.cardCvv.textContent = "";
+        clearFieldSuccess("cardCvv", cardCvv);
         return true;
     }
 
@@ -168,7 +191,7 @@
     if (cardNumber) {
         cardNumber.addEventListener("input", function () {
             cardNumber.value = formatCardNumber(cardNumber.value);
-            if (errors.cardNumber.textContent) {
+            if (hasFieldError("cardNumber")) {
                 validateCardNumber();
             }
         });
@@ -177,7 +200,7 @@
     if (cardHolder) {
         cardHolder.addEventListener("input", function () {
             cardHolder.value = cardHolder.value.replace(/[^A-Za-zА-Яа-яІіЇїЄєҐґ\s]/g, "");
-            if (errors.cardHolder.textContent) {
+            if (hasFieldError("cardHolder")) {
                 validateCardHolder();
             }
         });
@@ -186,7 +209,7 @@
     if (cardExpiry) {
         cardExpiry.addEventListener("input", function () {
             cardExpiry.value = formatExpiry(cardExpiry.value);
-            if (errors.cardExpiry.textContent) {
+            if (hasFieldError("cardExpiry")) {
                 validateExpiry();
             }
         });
@@ -195,7 +218,7 @@
     if (cardCvv) {
         cardCvv.addEventListener("input", function () {
             cardCvv.value = cardCvv.value.replace(/\D/g, "").slice(0, 4);
-            if (errors.cardCvv.textContent) {
+            if (hasFieldError("cardCvv")) {
                 validateCvv();
             }
         });

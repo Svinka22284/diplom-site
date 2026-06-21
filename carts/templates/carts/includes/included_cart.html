@@ -2,10 +2,15 @@
 {% load carts_tags %}
 
 {% user_carts request as carts %}
+{% cart_items_count request as items_count %}
 
-<button class="cart-btn" id="open-cart">
-    🛒 Кошик
+<button class="cart-btn" id="open-cart" type="button">
+    <span class="cart-btn__icon" aria-hidden="true">🛒</span>
+    <span class="cart-btn__label">Кошик</span>
+    <span class="cart-btn__count{% if items_count == 0 %} cart-btn__count--empty{% endif %}" id="goods-in-cart-count">{{ items_count }}</span>
 </button>
+
+<div id="jq-notification" class="cart-toast" role="alert" aria-live="polite" hidden></div>
 
 <div class="cart-overlay" id="cart-overlay"></div>
 

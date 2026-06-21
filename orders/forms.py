@@ -1,97 +1,56 @@
 import re
 
 from django import forms
+from django.core.exceptions import ValidationError
+
+REQUIRED_MSG = "Це поле є обов'язковим."
+
 
 class CreateOrderForm(forms.Form):
+    first_name = forms.CharField(
+        error_messages={"required": "Вкажіть ім'я отримувача."},
+    )
+    last_name = forms.CharField(
+        error_messages={"required": "Вкажіть прізвище отримувача."},
+    )
+    number = forms.CharField(
+        error_messages={"required": "Вкажіть номер телефону."},
+    )
+    requires_delivery = forms.ChoiceField(
+        choices=(
+            ("0", "Самовивіз"),
+            ("1", "Доставка"),
+        ),
+        error_messages={"required": REQUIRED_MSG},
+    )
+    delivery_address = forms.CharField(required=False)
+    payment_on_get = forms.ChoiceField(
+        choices=(
+            ("0", "Карткою"),
+            ("1", "Готівкою"),
+        ),
+        error_messages={"required": REQUIRED_MSG},
+    )
 
-     first_name = forms.CharField()
-     last_name = forms.CharField()
-     number = forms.CharField()
-     requires_delivery = forms.ChoiceField(
-          choices=(
-               ("0", "Самовивіз"),
-               ("1", "Доставка"),
-          )
-     )
-     delivery_address = forms.CharField(required=False)
-     payment_on_get = forms.ChoiceField(
-          choices=(
-               ("0", "Карткою"),
-               ("1", "Готівкою"),
-          )
-     )
+    def clean(self):
+        cleaned_data = super().clean()
+        requires_delivery = cleaned_data.get("requires_delivery")
+        delivery_address = (cleaned_data.get("delivery_address") or "").strip()
 
-     def clean_phone_number(self):
-          data = self.cleaned_data['number']
-          if not data.isdigit():
-               raise forms.ValidationError("Номер телефону повинен мати тільки цифри")
+        if requires_delivery == "1" and not delivery_address:
+            self.add_error("delivery_address", "Вкажіть адресу доставки.")
 
+        return cleaned_data
 
-          pattern = re.compile(r'^\d{10}$')
-          if not pattern.match(data):
-               raise forms.ValidationError("Незрозумілий формат номеру")
+    def clean_number(self):
+        data = self.cleaned_data.get("number", "")
+        if not data:
+            raise ValidationError("Вкажіть номер телефону.")
+        if not data.isdigit():
+            raise ValidationError("Номер телефону повинен містити тільки цифри.")
 
-          return data
+        pattern = re.compile(r"^\d{10}$")
+        if not pattern.match(data):
+            raise ValidationError("Номер телефону повинен містити 10 цифр.")
 
-
-
-
-    # first_name = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             'class': 'form-control',
-    #             'placeholder': "Введіть ваше ім'я",
-    #
-    #         }
-    #     )
-    # )
-    #
-    # last_name = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             'class': 'form-control',
-    #             'placeholder': "Введіть ваше прізвище",
-    #         }
-    #     )
-    # )
-    #
-    # number = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             'class': 'form-control',
-    #             'placeholder': "Введіть ваше прізвище",
-    #         }
-    #     )
-    # )
-    #
-    # requires_delivery = forms.BooleanField(
-    #     widget=forms.RedioSelect(
-    #         choices=[
-    #             ("0",False),
-    #             ("1",True),
-    #         ],
-    #         initial = 0,
-    #     )
-    # )
-    #
-    # delivery_address = forms.CharField(
-    #     widget=forms.Textarea(
-    #         attrs={
-    #             'class': 'form-control',
-    #             'id': 'delivery_address',
-    #             'rows': 2,
-    #             'placeholder': "Введіть вашу адресу"
-    #         }
-    #     ),
-    #     required=False,
-    # )
-    #
-    # payment_on_get = forms.ChoiceField(
-    #     widget=forms.RadioSelect(
-    #         choices=[
-    #             ("0",False),
-    #             ("1",True),
-    #         ],
-    #         initial="card",
-    #     )
-    # )
+        return data

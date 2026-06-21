@@ -45,10 +45,12 @@ def cart_add(request):
         request=request
     )
     total_price = sum(float(cart.product.sell_price()) * cart.quantity for cart in user_cart)
+    cart_count = sum(cart.quantity for cart in user_cart)
     response_data = {
-        "message": "Товар додан у кошик",
+        "message": "Товар додано в кошик",
         "cart_items_html": cart_items_html,
         "total_price": total_price,
+        "cart_count": cart_count,
     }
     return JsonResponse(response_data)
 

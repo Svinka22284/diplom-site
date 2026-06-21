@@ -1,0 +1,6 @@
+{% if form.non_field_errors %}
+<div class="form-error-msg form-error-msg--block" role="alert">
+    <span class="form-error-msg__icon" aria-hidden="true">⚠</span>
+    <span class="form-error-msg__text">{{ form.non_field_errors.0 }}</span>
+</div>
+{% endif %}

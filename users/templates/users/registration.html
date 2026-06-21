@@ -9,46 +9,47 @@
 {% block content %}
 <div class="page-register">
     <div class="wrapper_window">
-        <form action="{% url 'user:registration' %}" method="post">
+        <form action="{% url 'user:registration' %}" method="post" novalidate>
             {% csrf_token %}
             <h1>Реєстрація</h1>
+            {% include "includes/form_non_field_errors.html" %}
 
             <div class="form-row">
                 <div class="input-box">
                     <label for="id_username">Логін</label>
-                    <input type="text" id="id_username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" name="username" placeholder="Введіть логін" required>
-                    {% if form.username.errors %}<div>{{ form.username.errors }}</div>{% endif %}
+                    <input type="text" id="id_username"{% if form.username.errors %} class="is-invalid"{% endif %} value="{% if form.username.value %}{{ form.username.value }}{% endif %}" name="username" placeholder="Введіть логін">
+                    {% include "includes/form_field_errors.html" with errors=form.username.errors %}
                 </div>
                 <div class="input-box">
                     <label for="id_first_name">Ім'я</label>
-                    <input type="text" id="id_first_name" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" placeholder="Введіть ім'я" required>
-                    {% if form.first_name.errors %}<div>{{ form.first_name.errors }}</div>{% endif %}
+                    <input type="text" id="id_first_name"{% if form.first_name.errors %} class="is-invalid"{% endif %} value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" name="first_name" placeholder="Введіть ім'я">
+                    {% include "includes/form_field_errors.html" with errors=form.first_name.errors %}
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="input-box">
                     <label for="id_email">Електронна пошта</label>
-                    <input type="text" id="id_email" value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" placeholder="Введіть електронну пошту" required>
-                    {% if form.email.errors %}<div>{{ form.email.errors }}</div>{% endif %}
+                    <input type="email" id="id_email"{% if form.email.errors %} class="is-invalid"{% endif %} value="{% if form.email.value %}{{ form.email.value }}{% endif %}" name="email" placeholder="Введіть електронну пошту">
+                    {% include "includes/form_field_errors.html" with errors=form.email.errors %}
                 </div>
                 <div class="input-box">
                     <label for="id_number">Телефон</label>
-                    <input type="text" id="id_number" value="{% if form.number.value %}{{ form.number.value }}{% endif %}" name="number" placeholder="Введіть номер телефону" required>
-                    {% if form.number.errors %}<div>{{ form.number.errors }}</div>{% endif %}
+                    <input type="text" id="id_number"{% if form.number.errors %} class="is-invalid"{% endif %} value="{% if form.number.value %}{{ form.number.value }}{% endif %}" name="number" placeholder="Введіть номер телефону">
+                    {% include "includes/form_field_errors.html" with errors=form.number.errors %}
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="input-box">
                     <label for="id_password1">Пароль</label>
-                    <input type="password" id="id_password1" name="password1" placeholder="Введіть пароль" required>
-                    {% if form.password1.errors %}<div>{{ form.password1.errors }}</div>{% endif %}
+                    <input type="password" id="id_password1"{% if form.password1.errors %} class="is-invalid"{% endif %} name="password1" placeholder="Введіть пароль">
+                    {% include "includes/form_field_errors.html" with errors=form.password1.errors %}
                 </div>
                 <div class="input-box">
                     <label for="id_password2">Підтвердження</label>
-                    <input type="password" id="id_password2" name="password2" placeholder="Підтвердіть пароль" required>
-                    {% if form.password2.errors %}<div>{{ form.password2.errors }}</div>{% endif %}
+                    <input type="password" id="id_password2"{% if form.password2.errors %} class="is-invalid"{% endif %} name="password2" placeholder="Підтвердіть пароль">
+                    {% include "includes/form_field_errors.html" with errors=form.password2.errors %}
                 </div>
             </div>
 

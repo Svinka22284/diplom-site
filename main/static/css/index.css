@@ -2333,6 +2333,12 @@ select.is-invalid,
         grid-row: auto;
     }
 
+    .layout-sidebar .price-range {
+        max-width: calc(var(--layout-sidebar-width) - 40px);
+        margin-inline: auto;
+        box-sizing: border-box;
+    }
+
     .layout-main {
         grid-column: 1;
     }
@@ -2442,6 +2448,46 @@ select.is-invalid,
     .cart-btn-bar {
         justify-content: center;
         padding: 6px var(--layout-padding) 8px;
+    }
+
+    .layout-sidebar .dropdown_meny_catalog {
+        display: block;
+        max-width: 300px;
+        margin-inline: auto;
+    }
+
+    .layout-sidebar .price-range {
+        max-width: calc((var(--layout-sidebar-width) - 40px) * 0.75);
+        padding: 14px;
+    }
+
+    .layout-sidebar .price-input {
+        margin-bottom: 14px;
+    }
+
+    .layout-sidebar .price-range .field span {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .layout-sidebar .price-range .field input {
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .layout-sidebar .price-range .separator {
+        font-size: 14px;
+        margin-top: 12px;
+    }
+
+    .layout-sidebar .price-range input[type="range"]::-webkit-slider-thumb {
+        height: 16px;
+        width: 16px;
+    }
+
+    .layout-sidebar .price-range input[type="range"]::-moz-range-thumb {
+        height: 16px;
+        width: 16px;
     }
 
     .footer-row {

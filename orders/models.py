@@ -15,13 +15,13 @@ class OrderitemQueryset(models.QuerySet):
 
 class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT,blank=True,null=True, verbose_name="Користувачі", default=None)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name ="Дата створення заказа")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name ="Дата створення замовлення")
     number = models.CharField(max_length=20, verbose_name="Номер телефону")
     requires_delivery = models.BooleanField(default=False,verbose_name="Потрібно доставка")
     delivery_address = models.TextField(null=True, blank=True, verbose_name="Адреса доставки")
     payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при отриманні")
     is_paid = models.BooleanField(default=False,verbose_name="Оплачено")
-    status = models.CharField(max_length=50, default='В обробці', verbose_name="Статус заказа")
+    status = models.CharField(max_length=50, default='В обробці', verbose_name="Статус замовлення")
 
     class Meta:
         db_table = 'orders'
@@ -38,16 +38,16 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE, verbose_name="Замовлення")
-    product = models.ForeignKey(Products, on_delete=models.SET_DEFAULT, null=True, verbose_name="Продукт",default=None)
+    product = models.ForeignKey(Products, on_delete=models.SET_DEFAULT, null=True, verbose_name="Товар",default=None)
     name = models.CharField(max_length=150, verbose_name="Назва")
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Ціна")
     quantity = models.PositiveIntegerField(default=0, verbose_name="Кількість")
-    created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата продажи")
+    created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата продажу")
 
     class Meta:
         db_table = 'order_items'
         verbose_name = "Проданий товар"
-        verbose_name_plural = "Проданий товар"
+        verbose_name_plural = "Продані товари"
 
     objects = OrderitemQueryset.as_manager()
 

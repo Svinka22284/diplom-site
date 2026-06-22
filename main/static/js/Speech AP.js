@@ -21,6 +21,6 @@ if (!SpeechRecognition) {
     };
 
     recognition.onerror = (event) => {
-        console.error("Ошибка:", event.error);
+        console.error("Помилка:", event.error);
     };
 }

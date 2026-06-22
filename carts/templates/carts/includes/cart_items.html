@@ -7,23 +7,23 @@
         <img src="https://via.placeholder.com/120" alt="{{ cart.product.name }}">
         {% endif %}
     </div>
-    <div class="cart-item-main">
-        <h3>{{ cart.product.name }}</h3>
-        <p class="cart-desc"></p>
+    <div class="cart-item-header">
+        <h3 class="cart-item-title">{{ cart.product.name }}</h3>
+        <div class="cart-item-price">
+            <strong>{{ cart.products_pice }}</strong>
+        </div>
+    </div>
+    <div class="cart-item-controls">
         <div class="cart-actions">
-
             <button class="cart-remove" type="button">
                 <a href="#" class="remove-from-cart" data-cart-id="{{ cart.id }}">🗑</a>
             </button>
         </div>
         <div class="cart-qty">
-                <button class="decrement" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">-</button>
-                <span class="number">{{ cart.quantity }}</span>
-                <button class="increment" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">+</button>
-            </div>
-    </div>
-    <div class="cart-item-price">
-        <strong>{{ cart.products_pice }}</strong>
+            <button class="decrement" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">-</button>
+            <span class="number">{{ cart.quantity }}</span>
+            <button class="increment" type="button" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">+</button>
+        </div>
     </div>
 </article>
 {% endfor %}
